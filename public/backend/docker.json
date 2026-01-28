@@ -1,0 +1,52 @@
+{
+  "groups": [
+    { "key": "apps", "name": "应用服务", "icon": "" },
+    { "key": "db", "name": "数据库", "icon": "" }
+  ],
+  "containers": [
+    {
+      "key": "nginx",
+      "containerName": "nginx",
+      "displayName": "Nginx",
+      "description": "高性能 Web 服务器",
+      "groupKey": "apps",
+      "iconUrl": "",
+      "state": "running",
+      "enable": true,
+      "order": 1
+    },
+    {
+      "key": "redis",
+      "containerName": "redis",
+      "displayName": "Redis",
+      "description": "内存数据库",
+      "groupKey": "db",
+      "iconUrl": "",
+      "state": "running",
+      "enable": true,
+      "order": 2
+    },
+    {
+      "key": "mysql",
+      "containerName": "mysql",
+      "displayName": "MySQL",
+      "description": "关系型数据库",
+      "groupKey": "db",
+      "iconUrl": "",
+      "state": "running",
+      "enable": true,
+      "order": 3
+    },
+    {
+      "key": "portainer",
+      "containerName": "portainer",
+      "displayName": "Portainer",
+      "description": "Docker 管理面板",
+      "groupKey": "apps",
+      "iconUrl": "",
+      "state": "exited",
+      "enable": true,
+      "order": 4
+    }
+  ]
+}

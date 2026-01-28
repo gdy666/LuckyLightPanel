@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "sitesEnabled": true,
+  "dockerEnabled": true,
+  "luckyServicesEnabled": true,
+  "settings": {
+    "title": "LightPanel",
+    "subtitle": "Modern Dashboard",
+    "backgroundImages": [
+      "https://cdn.66666.host/background/001.webp",
+      "https://cdn.66666.host/background/002.webp"
+    ]
+  }
+}

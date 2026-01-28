@@ -1,0 +1,52 @@
+{
+  "groups": [
+    { "key": "web", "name": "Web 服务", "icon": "" },
+    { "key": "forward", "name": "转发服务", "icon": "" }
+  ],
+  "services": [
+    {
+      "key": "webservice-main",
+      "name": "主站点规则",
+      "displayName": "主站点",
+      "description": "默认 Web 服务规则",
+      "serviceType": "webservice-main",
+      "groupKey": "web",
+      "state": "running",
+      "enable": true,
+      "order": 1
+    },
+    {
+      "key": "webservice-api",
+      "name": "API 服务",
+      "displayName": "API 网关",
+      "description": "后端 API 代理服务",
+      "serviceType": "webservice",
+      "groupKey": "web",
+      "state": "running",
+      "enable": true,
+      "order": 2
+    },
+    {
+      "key": "portforward-ssh",
+      "name": "SSH 转发",
+      "displayName": "SSH 端口转发",
+      "description": "SSH 远程连接转发",
+      "serviceType": "portforward",
+      "groupKey": "forward",
+      "state": "running",
+      "enable": true,
+      "order": 3
+    },
+    {
+      "key": "stun-main",
+      "name": "STUN 服务",
+      "displayName": "NAT 穿透",
+      "description": "STUN 协议穿透服务",
+      "serviceType": "stun",
+      "groupKey": "forward",
+      "state": "enabled",
+      "enable": true,
+      "order": 4
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "ret": 0,
+  "stats": [
+    {
+      "key": "webservice-main",
+      "state": "running",
+      "tcpCurrentConnections": 42,
+      "udpCurrentConnections": 0,
+      "trafficIn": 1073741824,
+      "trafficOut": 536870912,
+      "inSpeed": 1048576,
+      "outSpeed": 524288
+    },
+    {
+      "key": "webservice-api",
+      "state": "running",
+      "tcpCurrentConnections": 18,
+      "udpCurrentConnections": 0,
+      "trafficIn": 268435456,
+      "trafficOut": 134217728,
+      "inSpeed": 262144,
+      "outSpeed": 131072
+    },
+    {
+      "key": "portforward-ssh",
+      "state": "running",
+      "tcpCurrentConnections": 3,
+      "udpCurrentConnections": 0,
+      "trafficIn": 10485760,
+      "trafficOut": 5242880,
+      "inSpeed": 10240,
+      "outSpeed": 5120
+    },
+    {
+      "key": "stun-main",
+      "state": "enabled",
+      "tcpCurrentConnections": 0,
+      "udpCurrentConnections": 5,
+      "trafficIn": 1048576,
+      "trafficOut": 524288,
+      "inSpeed": 1024,
+      "outSpeed": 512,
+      "publicAddr": "203.0.113.45:12345"
+    }
+  ]
+}

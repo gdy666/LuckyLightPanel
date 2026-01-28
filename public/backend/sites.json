@@ -1,0 +1,82 @@
+{
+  "networkType": "external",
+  "clientIP": "192.168.1.100",
+  "groups": [
+    { "key": "dev", "name": "开发工具", "icon": "" },
+    { "key": "media", "name": "影音娱乐", "icon": "" }
+  ],
+  "sites": [
+    {
+      "key": "github",
+      "name": "GitHub",
+      "description": "全球最大的代码托管平台",
+      "groupKey": "dev",
+      "frontendUrls": ["https://github.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 1
+    },
+    {
+      "key": "google",
+      "name": "Google",
+      "description": "全球最大的搜索引擎",
+      "groupKey": "dev",
+      "frontendUrls": ["https://www.google.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 2
+    },
+    {
+      "key": "youtube",
+      "name": "YouTube",
+      "description": "全球最大的视频平台",
+      "groupKey": "media",
+      "frontendUrls": ["https://www.youtube.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 3
+    },
+    {
+      "key": "bilibili",
+      "name": "哔哩哔哩",
+      "description": "国内知名的弹幕视频网站",
+      "groupKey": "media",
+      "frontendUrls": ["https://www.bilibili.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 4
+    },
+    {
+      "key": "stackoverflow",
+      "name": "Stack Overflow",
+      "description": "程序员问答社区",
+      "groupKey": "dev",
+      "frontendUrls": ["https://stackoverflow.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 5
+    },
+    {
+      "key": "netflix",
+      "name": "Netflix",
+      "description": "全球流媒体平台",
+      "groupKey": "media",
+      "frontendUrls": ["https://www.netflix.com"],
+      "backendUrls": [],
+      "iconUrl": "",
+      "target": "_blank",
+      "enable": true,
+      "order": 6
+    }
+  ]
+}

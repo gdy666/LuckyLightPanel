@@ -1,0 +1,29 @@
+{
+  "ret": 0,
+  "stats": [
+    {
+      "containerName": "nginx",
+      "state": "running",
+      "cpuPercent": "2.5%",
+      "memoryUsage": "128 MB",
+      "networkRxSpeed": 102400,
+      "networkTxSpeed": 51200
+    },
+    {
+      "containerName": "redis",
+      "state": "running",
+      "cpuPercent": "0.8%",
+      "memoryUsage": "64 MB",
+      "networkRxSpeed": 20480,
+      "networkTxSpeed": 10240
+    },
+    {
+      "containerName": "mysql",
+      "state": "running",
+      "cpuPercent": "5.2%",
+      "memoryUsage": "512 MB",
+      "networkRxSpeed": 204800,
+      "networkTxSpeed": 102400
+    }
+  ]
+}
