@@ -394,14 +394,14 @@ function openSettings() {
 }
 
 .time-icon {
-  width: 0.8125rem;
-  height: 0.8125rem;
+  width: 0.875rem;
+  height: 0.875rem;
   color: hsl(var(--text-muted));
   opacity: 0.6;
 }
 
 .time-value {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: hsl(var(--text-primary) / 0.75);
   letter-spacing: 0.02em;
@@ -414,7 +414,7 @@ function openSettings() {
 }
 
 .time-date {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   color: hsl(var(--text-primary) / 0.55);
   font-weight: 400;
 }
