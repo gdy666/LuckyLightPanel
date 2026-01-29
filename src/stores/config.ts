@@ -80,6 +80,14 @@ export const useConfigStore = defineStore('config', () => {
 
   // 计算属性：背景样式
   const backgroundStyle = computed(() => {
+    // 素描主题使用纸张质感纯色背景
+    if (config.value.theme === 'sketch-dark') {
+      return { background: 'hsl(40 12% 8%)' }
+    }
+    if (config.value.theme === 'sketch-light') {
+      return { background: 'hsl(45 30% 88%)' }
+    }
+
     const bg = config.value.background
 
     // 自定义背景
@@ -166,8 +174,9 @@ export const useConfigStore = defineStore('config', () => {
       hasStoredConfig.value = false
     }
 
-    // 验证主题有效性（移除了 auto 主题支持）
-    if (config.value.theme !== 'light' && config.value.theme !== 'dark') {
+    // 验证主题有效性
+    const validThemes = ['light', 'dark', 'sketch-light', 'sketch-dark']
+    if (!validThemes.includes(config.value.theme)) {
       config.value.theme = 'dark'
       saveConfig()
     }

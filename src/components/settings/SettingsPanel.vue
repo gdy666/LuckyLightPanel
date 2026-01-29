@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useConfigStore, PRESET_BACKGROUNDS } from '@/stores/config'
-import { X, Sun, Moon, RotateCcw, Palette, Eye, Check, Image, Github } from 'lucide-vue-next'
+import { X, Sun, Moon, Pencil, RotateCcw, Palette, Eye, Check, Image, Github } from 'lucide-vue-next'
 import type { ThemeMode } from '@/types'
 
 const configStore = useConfigStore()
@@ -18,8 +18,15 @@ function close() {
 // 主题选项
 const themeOptions: { value: ThemeMode; label: string; icon: typeof Sun; color: string }[] = [
   { value: 'light', label: '浅色', icon: Sun, color: 'var(--warning)' },
-  { value: 'dark', label: '深色', icon: Moon, color: 'var(--neon-purple)' }
+  { value: 'dark', label: '深色', icon: Moon, color: 'var(--neon-purple)' },
+  { value: 'sketch-light', label: '素描浅', icon: Pencil, color: 'var(--neon-blue)' },
+  { value: 'sketch-dark', label: '素描深', icon: Pencil, color: 'var(--neon-cyan)' }
 ]
+
+// 是否为素描主题（素描主题不支持自定义背景）
+const isSketchTheme = computed(() => 
+  configStore.theme === 'sketch-light' || configStore.theme === 'sketch-dark'
+)
 
 </script>
 
@@ -101,7 +108,7 @@ const themeOptions: { value: ThemeMode; label: string; icon: typeof Sun; color: 
         </section>
 
         <!-- 背景设置 -->
-        <section class="settings-section">
+        <section v-if="!isSketchTheme" class="settings-section">
           <div class="section-header">
             <span class="section-emoji">🌅</span>
             <h3 class="section-title">背景</h3>
@@ -379,7 +386,7 @@ const themeOptions: { value: ThemeMode; label: string; icon: typeof Sun; color: 
 /* 主题网格 */
 .theme-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
 }
 

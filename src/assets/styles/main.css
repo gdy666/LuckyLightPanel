@@ -15,6 +15,10 @@
 @import './themes/dark.css';
 /* 浅色主题 */
 @import './themes/light.css';
+/* 素描深色主题 */
+@import './themes/sketch-dark.css';
+/* 素描浅色主题 */
+@import './themes/sketch-light.css';
 
 /* 
  * 扩展主题示例：

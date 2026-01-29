@@ -1,0 +1,531 @@
+/* ============================================
+   Sketch Light Theme - 素描浅色主题
+   LightPanel Pro - Hand-drawn Style Design
+   ============================================ */
+
+[data-theme="sketch-light"] {
+  /* 素描风格主色调 - 柔和的铅笔色 */
+  --neon-cyan: 200 20% 40%;
+  --neon-cyan-rgb: 85, 110, 125;
+  --neon-purple: 260 18% 45%;
+  --neon-purple-rgb: 100, 90, 130;
+  --neon-pink: 340 20% 45%;
+  --neon-pink-rgb: 135, 95, 110;
+  --neon-blue: 210 25% 42%;
+  --neon-blue-rgb: 80, 105, 135;
+  --neon-green: 150 20% 38%;
+  --neon-green-rgb: 80, 115, 95;
+  
+  /* Docker 主题色 - 素描风格 */
+  --docker-orange: 25 30% 45%;
+  --docker-orange-rgb: 150, 115, 80;
+
+  /* 图标区域 - 素描风格滤镜（SVG 边缘抖动 + 纯灰度） */
+  --icon-brightness: 1.0;
+  --icon-filter: url(#sketch-filter) grayscale(100%) contrast(1.2) brightness(0.85);
+  --icon-filter-hover: url(#sketch-filter-hover) grayscale(100%) contrast(1.25) brightness(0.9);
+
+  /* 毛玻璃效果 - 米黄纸张质感 */
+  --glass-bg: 45 25% 92% / 0.95;
+  --glass-bg-hover: 45 25% 95% / 0.97;
+  --glass-border: 40 20% 70% / 0.5;
+  --glass-border-glow: none;
+  --glass-blur: 8px;
+  --glass-saturation: 100%;
+  --glass-shine: none;
+
+  /* 卡片样式 - 手绘纸张感 */
+  --card-bg: 45 30% 94% / 0.95;
+  --card-shadow: 
+    2px 3px 0 rgba(120, 100, 80, 0.12),
+    4px 5px 0 rgba(120, 100, 80, 0.06);
+  --card-shadow-hover: 
+    3px 4px 0 rgba(120, 100, 80, 0.15),
+    5px 6px 0 rgba(120, 100, 80, 0.08);
+  --card-glow: none;
+  --card-glow-hover: none;
+
+  /* 文字颜色 - 铅笔书写感 */
+  --text-primary: 40 25% 18%;
+  --text-secondary: 40 18% 35%;
+  --text-muted: 40 12% 50%;
+
+  /* 边框和背景 - 旧纸张浅色 */
+  --border-color: 40 18% 75%;
+  --border-subtle: 40 15% 82%;
+  --bg-page: 45 30% 88%;
+  --bg-elevated: 45 28% 94%;
+
+  /* 状态颜色 - 柔和手绘风 */
+  --primary: 210 25% 45%;
+  --primary-rgb: 85, 110, 145;
+  --success: 150 22% 40%;
+  --warning: 40 35% 50%;
+  --error: 0 30% 50%;
+
+  /* 站点卡片专属样式 - 素描纸张 */
+  --site-card-bg: 45 28% 95% / 0.92;
+  --site-card-bg-hover: 45 28% 97% / 0.95;
+  --site-card-blur: 4px;
+  --site-card-saturation: 100%;
+  --site-card-border: 40 18% 72% / 0.6;
+  --site-card-border-hover: 40 22% 60% / 0.7;
+  --site-card-inner-glow: none;
+  --site-card-shadow: 
+    2px 2px 0 rgba(120, 100, 80, 0.1),
+    3px 3px 0 rgba(120, 100, 80, 0.05);
+  --site-card-shadow-hover: 
+    3px 3px 0 rgba(120, 100, 80, 0.12),
+    4px 4px 0 rgba(120, 100, 80, 0.06);
+  --site-card-shine-opacity: 0;
+  --site-card-shine-hover: 0;
+  
+  /* 素描专属变量 */
+  --sketch-border-style: 2px solid;
+  --sketch-border-radius: 3px;
+  --sketch-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* 素描浅色主题 - 移除所有霓虹光效 */
+[data-theme="sketch-light"] .glass-card::after,
+[data-theme="sketch-light"] .glass-card-neon::after {
+  display: none;
+}
+
+[data-theme="sketch-light"] .glass-card::before {
+  background: var(--sketch-texture);
+  opacity: 1;
+}
+
+/* 素描风格卡片 hover 效果 */
+[data-theme="sketch-light"] .glass-card:hover,
+[data-theme="sketch-light"] .glass-card-neon:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  border-color: hsl(40 22% 60% / 0.7);
+}
+
+/* 图标素描化 */
+[data-theme="sketch-light"] .card-icon,
+[data-theme="sketch-light"] .site-icon,
+[data-theme="sketch-light"] .neon-icon,
+[data-theme="sketch-light"] .icon-box,
+[data-theme="sketch-light"] .compact-icon,
+[data-theme="sketch-light"] .list-icon,
+[data-theme="sketch-light"] .minimal-icon {
+  filter: var(--icon-filter);
+  transition: filter 0.3s ease;
+}
+
+[data-theme="sketch-light"] .icon-wrapper img,
+[data-theme="sketch-light"] .container-icon img,
+[data-theme="sketch-light"] .service-icon img,
+[data-theme="sketch-light"] .icon-img {
+  filter: var(--icon-filter);
+  transition: filter 0.3s ease;
+}
+
+[data-theme="sketch-light"] .card-icon:hover,
+[data-theme="sketch-light"] .site-icon:hover,
+[data-theme="sketch-light"] .glass-card:hover .neon-icon,
+[data-theme="sketch-light"] .glass-card:hover .icon-wrapper img,
+[data-theme="sketch-light"] .glass-card:hover .container-icon img,
+[data-theme="sketch-light"] .glass-card:hover .service-icon img,
+[data-theme="sketch-light"] .docker-card:hover .icon-box,
+[data-theme="sketch-light"] .docker-card:hover .compact-icon,
+[data-theme="sketch-light"] .docker-card:hover .list-icon,
+[data-theme="sketch-light"] .docker-card:hover .minimal-icon,
+[data-theme="sketch-light"] .service-card:hover .icon-box,
+[data-theme="sketch-light"] .service-card:hover .compact-icon,
+[data-theme="sketch-light"] .service-card:hover .list-icon,
+[data-theme="sketch-light"] .service-card:hover .minimal-icon,
+[data-theme="sketch-light"] .cyber-card:hover .icon-img,
+[data-theme="sketch-light"] .docker-card:hover .icon-img,
+[data-theme="sketch-light"] .service-card:hover .icon-img {
+  filter: var(--icon-filter-hover);
+}
+
+/* 素描风格按钮 */
+[data-theme="sketch-light"] .action-btn,
+[data-theme="sketch-light"] button {
+  border-radius: var(--sketch-border-radius);
+}
+
+/* 素描风格输入框 */
+[data-theme="sketch-light"] input,
+[data-theme="sketch-light"] .search-input {
+  border-radius: var(--sketch-border-radius);
+  border: var(--sketch-border-style) hsl(var(--border-color));
+}
+
+/* 移除科技感背景动画 */
+[data-theme="sketch-light"] .tech-background,
+[data-theme="sketch-light"] .bg-gradient-aurora {
+  background: hsl(var(--bg-page)) !important;
+}
+
+[data-theme="sketch-light"] .tech-background::before,
+[data-theme="sketch-light"] .tech-background::after,
+[data-theme="sketch-light"] .particle,
+[data-theme="sketch-light"] .grid-line {
+  display: none !important;
+}
+
+/* 素描风格标签页 */
+[data-theme="sketch-light"] .tab-item {
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-light"] .tab-item.active {
+  border: 2px solid hsl(var(--text-secondary));
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+}
+
+/* ============================================
+   内容标签页 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .content-tabs {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.1);
+}
+
+[data-theme="sketch-light"] .content-tab {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-light"] .content-tab:hover {
+  background: hsl(45 25% 90%);
+}
+
+[data-theme="sketch-light"] .content-tab.active {
+  background: hsl(45 20% 85%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 2px solid hsl(40 20% 60%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+}
+
+/* 移除标签页的彩色渐变和光晕 */
+[data-theme="sketch-light"] .content-tab.tab-docker.active,
+[data-theme="sketch-light"] .content-tab.tab-luckyServices.active {
+  background: hsl(45 20% 85%) !important;
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08) !important;
+}
+
+[data-theme="sketch-light"] .content-tab .tab-icon,
+[data-theme="sketch-light"] .content-tab.tab-docker .tab-icon,
+[data-theme="sketch-light"] .content-tab.tab-luckyServices .tab-icon {
+  color: hsl(var(--text-secondary)) !important;
+  filter: var(--icon-filter);
+}
+
+[data-theme="sketch-light"] .content-tab.active .tab-icon {
+  color: hsl(var(--text-primary)) !important;
+}
+
+/* ============================================
+   分组下拉菜单 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .group-badge {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .group-badge:hover {
+  background: hsl(45 28% 92%);
+  border-color: hsl(40 22% 68%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.1) !important;
+}
+
+/* 移除分组徽章的彩色 */
+[data-theme="sketch-light"] .color-cyan .group-badge,
+[data-theme="sketch-light"] .color-docker .group-badge,
+[data-theme="sketch-light"] .color-green .group-badge {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+[data-theme="sketch-light"] .group-dropdown {
+  background: hsl(45 28% 96% / 0.98);
+  border: 2px solid hsl(40 25% 78%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .group-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-light"] .group-option:hover,
+[data-theme="sketch-light"] .option-main:hover {
+  background: hsl(45 25% 90%);
+}
+
+[data-theme="sketch-light"] .group-option.active {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 1px solid hsl(40 20% 68%);
+}
+
+[data-theme="sketch-light"] .color-cyan .group-option.active,
+[data-theme="sketch-light"] .color-docker .group-option.active,
+[data-theme="sketch-light"] .color-green .group-option.active {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-light"] .dropdown-divider {
+  background: hsl(40 20% 82%);
+}
+
+/* ============================================
+   分组标签页 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .group-tabs {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.1);
+}
+
+[data-theme="sketch-light"] .group-tab {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-light"] .group-tab:hover {
+  background: hsl(45 25% 90%);
+}
+
+[data-theme="sketch-light"] .group-tab.active,
+[data-theme="sketch-light"] .group-tab.color-cyan.active,
+[data-theme="sketch-light"] .group-tab.color-docker.active,
+[data-theme="sketch-light"] .group-tab.color-green.active {
+  background: hsl(45 20% 85%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 2px solid hsl(40 20% 60%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08) !important;
+}
+
+/* ============================================
+   布局切换器 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .layout-badge {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .layout-badge:hover {
+  background: hsl(45 28% 92%);
+  border-color: hsl(40 22% 68%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.1) !important;
+}
+
+[data-theme="sketch-light"] .layout-dropdown {
+  background: hsl(45 28% 96% / 0.98);
+  border: 2px solid hsl(40 25% 78%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .layout-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-light"] .layout-option:hover {
+  background: hsl(45 25% 90%);
+}
+
+[data-theme="sketch-light"] .layout-option.active {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-light"] .layout-preview {
+  border-color: hsl(40 20% 75%);
+  background: hsl(45 25% 92%);
+}
+
+[data-theme="sketch-light"] .layout-option.active .layout-preview {
+  border-color: hsl(40 22% 65%);
+  background: hsl(45 22% 88%);
+}
+
+/* 布局预览内元素变灰 */
+[data-theme="sketch-light"] .preview-icon-box,
+[data-theme="sketch-light"] .preview-badge,
+[data-theme="sketch-light"] .preview-dot,
+[data-theme="sketch-light"] .preview-list-dot,
+[data-theme="sketch-light"] .preview-list-badge,
+[data-theme="sketch-light"] .preview-mini-icon,
+[data-theme="sketch-light"] .preview-mini-dot {
+  background: hsl(40 15% 55%) !important;
+}
+
+[data-theme="sketch-light"] .preview-compact-item,
+[data-theme="sketch-light"] .preview-list-row,
+[data-theme="sketch-light"] .preview-mini-card {
+  background: hsl(45 22% 88%) !important;
+}
+
+[data-theme="sketch-light"] .preview-stat-box {
+  background: hsl(45 22% 88%) !important;
+  border-color: hsl(40 20% 75%) !important;
+}
+
+/* ============================================
+   Docker 总览面板 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .overview-badge {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .overview-badge:hover {
+  background: hsl(45 28% 92%);
+  border-color: hsl(40 22% 68%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.1) !important;
+}
+
+[data-theme="sketch-light"] .overview-panel {
+  background: hsl(45 30% 97% / 0.98);
+  border: 2px solid hsl(40 25% 78%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 4px 4px 0 rgba(120, 100, 80, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .panel-header {
+  background: hsl(45 28% 93%);
+  border-bottom: 2px solid hsl(40 22% 80%);
+}
+
+[data-theme="sketch-light"] .header-glow,
+[data-theme="sketch-light"] .divider-glow,
+[data-theme="sketch-light"] .footer-line {
+  display: none;
+}
+
+[data-theme="sketch-light"] .header-icon {
+  background: none !important;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: hsl(var(--text-secondary));
+  background-clip: unset;
+}
+
+[data-theme="sketch-light"] .header-badge {
+  background: hsl(45 25% 90%);
+  color: hsl(var(--text-secondary));
+  border-color: hsl(40 20% 75%);
+}
+
+[data-theme="sketch-light"] .section-icon {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-secondary)) !important;
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08) !important;
+}
+
+[data-theme="sketch-light"] .rank-item {
+  background: hsl(45 28% 95%);
+  border: 1px solid hsl(40 22% 82%);
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-light"] .rank-item:hover {
+  background: hsl(45 26% 92%);
+}
+
+[data-theme="sketch-light"] .rank-item.rank-1 {
+  background: hsl(45 25% 92%) !important;
+  border-color: hsl(40 22% 72%);
+}
+
+[data-theme="sketch-light"] .rank-number {
+  background: hsl(45 25% 90%);
+  border-color: hsl(40 18% 70%);
+  color: hsl(var(--text-secondary)) !important;
+}
+
+[data-theme="sketch-light"] .rank-1 .rank-number {
+  background: hsl(45 22% 85%);
+  box-shadow: none;
+}
+
+[data-theme="sketch-light"] .rank-bar-wrapper {
+  background: hsl(45 22% 88%);
+}
+
+[data-theme="sketch-light"] .rank-bar.cpu-bar,
+[data-theme="sketch-light"] .rank-bar.memory-bar {
+  background: hsl(40 15% 55%) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="sketch-light"] .divider-line {
+  background: hsl(40 20% 82%);
+}
+
+[data-theme="sketch-light"] .footer-dots span {
+  background: hsl(40 18% 78%);
+}
+
+/* ============================================
+   网络模式选择器 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-light"] .network-badge {
+  background: hsl(45 30% 95% / 0.95);
+  border: 2px solid hsl(40 25% 75%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.08);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .network-badge:hover {
+  background: hsl(45 28% 92%);
+  border-color: hsl(40 22% 68%);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.1) !important;
+}
+
+[data-theme="sketch-light"] .network-dropdown {
+  background: hsl(45 28% 96% / 0.98);
+  border: 2px solid hsl(40 25% 78%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .network-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-light"] .network-option:hover {
+  background: hsl(45 25% 90%);
+}
+
+[data-theme="sketch-light"] .network-option.active {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-primary)) !important;
+}

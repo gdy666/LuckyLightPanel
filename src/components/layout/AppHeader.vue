@@ -2,7 +2,8 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useConfigStore } from '@/stores/config'
 import { useNavStore } from '@/stores/nav'
-import { Settings, Moon, Sun, Clock, Zap } from 'lucide-vue-next'
+import { Settings, Moon, Sun, Pencil, Clock, Zap, ChevronDown, Check } from 'lucide-vue-next'
+import type { ThemeMode } from '@/types'
 
 const configStore = useConfigStore()
 const navStore = useNavStore()
@@ -10,7 +11,48 @@ const navStore = useNavStore()
 const title = computed(() => navStore.panelTitle)
 const subtitle = computed(() => navStore.panelSubtitle)
 const logo = computed(() => navStore.panelLogo)
-const effectiveTheme = computed(() => configStore.effectiveTheme)
+
+// 主题下拉菜单状态
+const themeDropdownOpen = ref(false)
+
+// 主题选项列表
+const themeOptions: { value: ThemeMode; label: string; icon: typeof Sun }[] = [
+  { value: 'light', label: '浅色', icon: Sun },
+  { value: 'dark', label: '深色', icon: Moon },
+  { value: 'sketch-light', label: '素描浅', icon: Pencil },
+  { value: 'sketch-dark', label: '素描深', icon: Pencil }
+]
+
+// 获取当前主题图标
+const currentThemeIcon = computed(() => {
+  const option = themeOptions.find(o => o.value === configStore.theme)
+  return option?.icon || Sun
+})
+
+// 获取当前主题名称
+const currentThemeLabel = computed(() => {
+  const option = themeOptions.find(o => o.value === configStore.theme)
+  return option?.label || '主题'
+})
+
+// 切换下拉菜单
+function toggleThemeDropdown() {
+  themeDropdownOpen.value = !themeDropdownOpen.value
+}
+
+// 选择主题
+function selectTheme(theme: ThemeMode) {
+  configStore.setTheme(theme)
+  themeDropdownOpen.value = false
+}
+
+// 点击外部关闭下拉菜单
+function closeThemeDropdown(event: MouseEvent) {
+  const target = event.target as HTMLElement
+  if (!target.closest('.theme-dropdown-wrapper')) {
+    themeDropdownOpen.value = false
+  }
+}
 
 // 时间相关
 const now = ref(new Date())
@@ -20,10 +62,13 @@ onMounted(() => {
   timer = setInterval(() => {
     now.value = new Date()
   }, 1000)
+  // 监听全局点击关闭下拉菜单
+  document.addEventListener('click', closeThemeDropdown)
 })
 
 onUnmounted(() => {
   if (timer) clearInterval(timer)
+  document.removeEventListener('click', closeThemeDropdown)
 })
 
 const currentTime = computed(() => {
@@ -49,13 +94,6 @@ const logoUrl = computed(() => {
   
   return `./backend/iconlibs/${logoPath}`
 })
-
-function cycleTheme() {
-  const themes = ['light', 'dark'] as const
-  const currentIndex = themes.indexOf(configStore.theme)
-  const nextIndex = (currentIndex + 1) % themes.length
-  configStore.setTheme(themes[nextIndex])
-}
 
 function openSettings() {
   configStore.toggleSettingsPanel(true)
@@ -128,21 +166,43 @@ function openSettings() {
         
         <!-- 分隔线 -->
         <div v-if="configStore.showTime" class="actions-divider" />
-        <!-- 主题按钮 -->
-        <button class="action-btn" @click="cycleTheme" :title="`主题: ${configStore.theme === 'dark' ? '深色' : '浅色'}`">
-          <div class="btn-inner">
-            <Transition
-              mode="out-in"
-              enter-active-class="icon-enter"
-              enter-from-class="icon-enter-from"
-              leave-active-class="icon-leave"
-              leave-to-class="icon-leave-to"
-            >
-              <Sun v-if="effectiveTheme === 'light'" class="btn-icon" />
-              <Moon v-else class="btn-icon" />
-            </Transition>
-          </div>
-        </button>
+        
+        <!-- 主题下拉选择器 -->
+        <div class="theme-dropdown-wrapper">
+          <button 
+            class="action-btn theme-btn" 
+            :class="{ active: themeDropdownOpen }"
+            @click.stop="toggleThemeDropdown" 
+            :title="`主题: ${currentThemeLabel}`"
+          >
+            <div class="btn-inner">
+              <component :is="currentThemeIcon" class="btn-icon" />
+              <ChevronDown class="dropdown-arrow" :class="{ open: themeDropdownOpen }" />
+            </div>
+          </button>
+          
+          <!-- 下拉菜单 -->
+          <Transition
+            enter-active-class="dropdown-enter"
+            enter-from-class="dropdown-enter-from"
+            leave-active-class="dropdown-leave"
+            leave-to-class="dropdown-leave-to"
+          >
+            <div v-if="themeDropdownOpen" class="theme-dropdown">
+              <button
+                v-for="option in themeOptions"
+                :key="option.value"
+                class="theme-option"
+                :class="{ active: configStore.theme === option.value }"
+                @click="selectTheme(option.value)"
+              >
+                <component :is="option.icon" class="option-icon" />
+                <span class="option-label">{{ option.label }}</span>
+                <Check v-if="configStore.theme === option.value" class="option-check" />
+              </button>
+            </div>
+          </Transition>
+        </div>
 
         <!-- 设置按钮 -->
         <button class="action-btn settings-btn" @click="openSettings" title="设置">
@@ -260,6 +320,12 @@ function openSettings() {
   width: 2.25rem;
   height: 2.25rem;
   object-fit: contain;
+  filter: var(--icon-filter, none);
+  transition: filter 0.3s ease;
+}
+
+.logo-wrapper:hover .logo-img {
+  filter: var(--icon-filter-hover, none);
 }
 
 .logo-placeholder {
@@ -486,23 +552,118 @@ function openSettings() {
   transform: rotate(45deg);
 }
 
-/* 图标动画 */
-.icon-enter {
+/* ============================================
+   主题下拉选择器
+   ============================================ */
+
+.theme-dropdown-wrapper {
+  position: relative;
+}
+
+.theme-btn {
+  width: auto;
+  padding: 0 0.5rem;
+  gap: 0.25rem;
+}
+
+.theme-btn .btn-inner {
+  gap: 0.25rem;
+}
+
+.theme-btn.active {
+  background: hsl(var(--bg-elevated) / 0.7);
+  border-color: hsl(var(--border-subtle) / 0.4);
+}
+
+.dropdown-arrow {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: hsl(var(--text-muted));
+  transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 120px;
+  padding: 0.375rem;
+  border-radius: 0.75rem;
+  background: hsl(var(--bg-elevated));
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid hsl(var(--border-subtle) / 0.5);
+  box-shadow: 
+    0 4px 24px -4px rgba(0, 0, 0, 0.3),
+    0 8px 32px -8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: hsl(var(--text-secondary));
+}
+
+.theme-option:hover {
+  background: hsl(var(--glass-bg-hover));
+  color: hsl(var(--text-primary));
+}
+
+.theme-option.active {
+  background: hsl(var(--neon-cyan) / 0.1);
+  color: hsl(var(--neon-cyan));
+}
+
+.option-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.option-label {
+  flex: 1;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.option-check {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: hsl(var(--neon-cyan));
+  flex-shrink: 0;
+}
+
+/* 下拉菜单动画 */
+.dropdown-enter {
   transition: all 0.2s ease-out;
 }
 
-.icon-enter-from {
+.dropdown-enter-from {
   opacity: 0;
-  transform: scale(0.8) rotate(-90deg);
+  transform: translateY(-8px) scale(0.95);
 }
 
-.icon-leave {
+.dropdown-leave {
   transition: all 0.15s ease-in;
 }
 
-.icon-leave-to {
+.dropdown-leave-to {
   opacity: 0;
-  transform: scale(0.8) rotate(90deg);
+  transform: translateY(-8px) scale(0.95);
 }
 
 /* ============================================

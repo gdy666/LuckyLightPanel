@@ -1,0 +1,531 @@
+/* ============================================
+   Sketch Dark Theme - 素描深色主题
+   LightPanel Pro - Hand-drawn Style Design
+   ============================================ */
+
+[data-theme="sketch-dark"] {
+  /* 素描风格主色调 - 柔和的铅笔色 */
+  --neon-cyan: 200 15% 55%;
+  --neon-cyan-rgb: 130, 145, 155;
+  --neon-purple: 260 12% 50%;
+  --neon-purple-rgb: 125, 115, 140;
+  --neon-pink: 340 15% 55%;
+  --neon-pink-rgb: 155, 125, 135;
+  --neon-blue: 210 18% 50%;
+  --neon-blue-rgb: 105, 125, 150;
+  --neon-green: 150 15% 45%;
+  --neon-green-rgb: 100, 130, 110;
+  
+  /* Docker 主题色 - 素描风格 */
+  --docker-orange: 25 20% 50%;
+  --docker-orange-rgb: 155, 130, 100;
+
+  /* 图标区域 - 素描风格滤镜（SVG 边缘抖动 + 纯灰度） */
+  --icon-brightness: 0.9;
+  --icon-filter: url(#sketch-filter) grayscale(100%) contrast(1.1) brightness(0.9);
+  --icon-filter-hover: url(#sketch-filter-hover) grayscale(100%) contrast(1.15) brightness(0.95);
+
+  /* 毛玻璃效果 - 纸张质感 */
+  --glass-bg: 40 8% 12% / 0.95;
+  --glass-bg-hover: 40 8% 15% / 0.97;
+  --glass-border: 40 10% 30% / 0.4;
+  --glass-border-glow: none;
+  --glass-blur: 8px;
+  --glass-saturation: 100%;
+  --glass-shine: none;
+
+  /* 卡片样式 - 手绘纸张感 */
+  --card-bg: 40 8% 14% / 0.95;
+  --card-shadow: 
+    2px 3px 0 rgba(0, 0, 0, 0.15),
+    4px 5px 0 rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 
+    3px 4px 0 rgba(0, 0, 0, 0.18),
+    5px 6px 0 rgba(0, 0, 0, 0.1);
+  --card-glow: none;
+  --card-glow-hover: none;
+
+  /* 文字颜色 - 铅笔书写感 */
+  --text-primary: 40 10% 85%;
+  --text-secondary: 40 8% 65%;
+  --text-muted: 40 6% 50%;
+
+  /* 边框和背景 - 旧纸张深色 */
+  --border-color: 40 10% 28%;
+  --border-subtle: 40 8% 22%;
+  --bg-page: 40 12% 8%;
+  --bg-elevated: 40 10% 12%;
+
+  /* 状态颜色 - 柔和手绘风 */
+  --primary: 210 20% 55%;
+  --primary-rgb: 110, 135, 165;
+  --success: 150 18% 45%;
+  --warning: 40 30% 55%;
+  --error: 0 25% 55%;
+
+  /* 站点卡片专属样式 - 素描纸张 */
+  --site-card-bg: 40 8% 15% / 0.92;
+  --site-card-bg-hover: 40 8% 18% / 0.95;
+  --site-card-blur: 4px;
+  --site-card-saturation: 100%;
+  --site-card-border: 40 12% 35% / 0.5;
+  --site-card-border-hover: 40 15% 45% / 0.6;
+  --site-card-inner-glow: none;
+  --site-card-shadow: 
+    2px 2px 0 rgba(0, 0, 0, 0.12),
+    3px 3px 0 rgba(0, 0, 0, 0.06);
+  --site-card-shadow-hover: 
+    3px 3px 0 rgba(0, 0, 0, 0.15),
+    4px 4px 0 rgba(0, 0, 0, 0.08);
+  --site-card-shine-opacity: 0;
+  --site-card-shine-hover: 0;
+  
+  /* 素描专属变量 */
+  --sketch-border-style: 2px solid;
+  --sketch-border-radius: 3px;
+  --sketch-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* 素描深色主题 - 移除所有霓虹光效 */
+[data-theme="sketch-dark"] .glass-card::after,
+[data-theme="sketch-dark"] .glass-card-neon::after {
+  display: none;
+}
+
+[data-theme="sketch-dark"] .glass-card::before {
+  background: var(--sketch-texture);
+  opacity: 1;
+}
+
+/* 素描风格卡片 hover 效果 */
+[data-theme="sketch-dark"] .glass-card:hover,
+[data-theme="sketch-dark"] .glass-card-neon:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  border-color: hsl(40 15% 40% / 0.6);
+}
+
+/* 图标素描化 */
+[data-theme="sketch-dark"] .card-icon,
+[data-theme="sketch-dark"] .site-icon,
+[data-theme="sketch-dark"] .neon-icon,
+[data-theme="sketch-dark"] .icon-box,
+[data-theme="sketch-dark"] .compact-icon,
+[data-theme="sketch-dark"] .list-icon,
+[data-theme="sketch-dark"] .minimal-icon {
+  filter: var(--icon-filter);
+  transition: filter 0.3s ease;
+}
+
+[data-theme="sketch-dark"] .icon-wrapper img,
+[data-theme="sketch-dark"] .container-icon img,
+[data-theme="sketch-dark"] .service-icon img,
+[data-theme="sketch-dark"] .icon-img {
+  filter: var(--icon-filter);
+  transition: filter 0.3s ease;
+}
+
+[data-theme="sketch-dark"] .card-icon:hover,
+[data-theme="sketch-dark"] .site-icon:hover,
+[data-theme="sketch-dark"] .glass-card:hover .neon-icon,
+[data-theme="sketch-dark"] .glass-card:hover .icon-wrapper img,
+[data-theme="sketch-dark"] .glass-card:hover .container-icon img,
+[data-theme="sketch-dark"] .glass-card:hover .service-icon img,
+[data-theme="sketch-dark"] .docker-card:hover .icon-box,
+[data-theme="sketch-dark"] .docker-card:hover .compact-icon,
+[data-theme="sketch-dark"] .docker-card:hover .list-icon,
+[data-theme="sketch-dark"] .docker-card:hover .minimal-icon,
+[data-theme="sketch-dark"] .service-card:hover .icon-box,
+[data-theme="sketch-dark"] .service-card:hover .compact-icon,
+[data-theme="sketch-dark"] .service-card:hover .list-icon,
+[data-theme="sketch-dark"] .service-card:hover .minimal-icon,
+[data-theme="sketch-dark"] .cyber-card:hover .icon-img,
+[data-theme="sketch-dark"] .docker-card:hover .icon-img,
+[data-theme="sketch-dark"] .service-card:hover .icon-img {
+  filter: var(--icon-filter-hover);
+}
+
+/* 素描风格按钮 */
+[data-theme="sketch-dark"] .action-btn,
+[data-theme="sketch-dark"] button {
+  border-radius: var(--sketch-border-radius);
+}
+
+/* 素描风格输入框 */
+[data-theme="sketch-dark"] input,
+[data-theme="sketch-dark"] .search-input {
+  border-radius: var(--sketch-border-radius);
+  border: var(--sketch-border-style) hsl(var(--border-color));
+}
+
+/* 移除科技感背景动画 */
+[data-theme="sketch-dark"] .tech-background,
+[data-theme="sketch-dark"] .bg-gradient-aurora {
+  background: hsl(var(--bg-page)) !important;
+}
+
+[data-theme="sketch-dark"] .tech-background::before,
+[data-theme="sketch-dark"] .tech-background::after,
+[data-theme="sketch-dark"] .particle,
+[data-theme="sketch-dark"] .grid-line {
+  display: none !important;
+}
+
+/* 素描风格标签页 */
+[data-theme="sketch-dark"] .tab-item {
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-dark"] .tab-item.active {
+  border: 2px solid hsl(var(--text-secondary));
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   内容标签页 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .content-tabs {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="sketch-dark"] .content-tab {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-dark"] .content-tab:hover {
+  background: hsl(40 8% 20%);
+}
+
+[data-theme="sketch-dark"] .content-tab.active {
+  background: hsl(40 10% 25%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 2px solid hsl(40 15% 40%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 移除标签页的彩色渐变和光晕 */
+[data-theme="sketch-dark"] .content-tab.tab-docker.active,
+[data-theme="sketch-dark"] .content-tab.tab-luckyServices.active {
+  background: hsl(40 10% 25%) !important;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="sketch-dark"] .content-tab .tab-icon,
+[data-theme="sketch-dark"] .content-tab.tab-docker .tab-icon,
+[data-theme="sketch-dark"] .content-tab.tab-luckyServices .tab-icon {
+  color: hsl(var(--text-secondary)) !important;
+  filter: var(--icon-filter);
+}
+
+[data-theme="sketch-dark"] .content-tab.active .tab-icon {
+  color: hsl(var(--text-primary)) !important;
+}
+
+/* ============================================
+   分组下拉菜单 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .group-badge {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .group-badge:hover {
+  background: hsl(40 8% 18%);
+  border-color: hsl(40 15% 35%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 移除分组徽章的彩色 */
+[data-theme="sketch-dark"] .color-cyan .group-badge,
+[data-theme="sketch-dark"] .color-docker .group-badge,
+[data-theme="sketch-dark"] .color-green .group-badge {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+[data-theme="sketch-dark"] .group-dropdown {
+  background: hsl(40 8% 12% / 0.98);
+  border: 2px solid hsl(40 12% 28%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .group-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-dark"] .group-option:hover,
+[data-theme="sketch-dark"] .option-main:hover {
+  background: hsl(40 8% 18%);
+}
+
+[data-theme="sketch-dark"] .group-option.active {
+  background: hsl(40 10% 20%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 1px solid hsl(40 12% 35%);
+}
+
+[data-theme="sketch-dark"] .color-cyan .group-option.active,
+[data-theme="sketch-dark"] .color-docker .group-option.active,
+[data-theme="sketch-dark"] .color-green .group-option.active {
+  background: hsl(40 10% 20%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-dark"] .dropdown-divider {
+  background: hsl(40 10% 25%);
+}
+
+/* ============================================
+   分组标签页 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .group-tabs {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="sketch-dark"] .group-tab {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-dark"] .group-tab:hover {
+  background: hsl(40 8% 20%);
+}
+
+[data-theme="sketch-dark"] .group-tab.active,
+[data-theme="sketch-dark"] .group-tab.color-cyan.active,
+[data-theme="sketch-dark"] .group-tab.color-docker.active,
+[data-theme="sketch-dark"] .group-tab.color-green.active {
+  background: hsl(40 10% 25%) !important;
+  color: hsl(var(--text-primary)) !important;
+  border: 2px solid hsl(40 15% 40%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ============================================
+   布局切换器 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .layout-badge {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .layout-badge:hover {
+  background: hsl(40 8% 18%);
+  border-color: hsl(40 15% 35%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="sketch-dark"] .layout-dropdown {
+  background: hsl(40 8% 12% / 0.98);
+  border: 2px solid hsl(40 12% 28%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .layout-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-dark"] .layout-option:hover {
+  background: hsl(40 8% 18%);
+}
+
+[data-theme="sketch-dark"] .layout-option.active {
+  background: hsl(40 10% 20%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-dark"] .layout-preview {
+  border-color: hsl(40 12% 35%);
+  background: hsl(40 8% 18%);
+}
+
+[data-theme="sketch-dark"] .layout-option.active .layout-preview {
+  border-color: hsl(40 15% 45%);
+  background: hsl(40 10% 22%);
+}
+
+/* 布局预览内元素变灰 */
+[data-theme="sketch-dark"] .preview-icon-box,
+[data-theme="sketch-dark"] .preview-badge,
+[data-theme="sketch-dark"] .preview-dot,
+[data-theme="sketch-dark"] .preview-list-dot,
+[data-theme="sketch-dark"] .preview-list-badge,
+[data-theme="sketch-dark"] .preview-mini-icon,
+[data-theme="sketch-dark"] .preview-mini-dot {
+  background: hsl(40 10% 45%) !important;
+}
+
+[data-theme="sketch-dark"] .preview-compact-item,
+[data-theme="sketch-dark"] .preview-list-row,
+[data-theme="sketch-dark"] .preview-mini-card {
+  background: hsl(40 8% 22%) !important;
+}
+
+[data-theme="sketch-dark"] .preview-stat-box {
+  background: hsl(40 8% 22%) !important;
+  border-color: hsl(40 12% 30%) !important;
+}
+
+/* ============================================
+   Docker 总览面板 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .overview-badge {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .overview-badge:hover {
+  background: hsl(40 8% 18%);
+  border-color: hsl(40 15% 35%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="sketch-dark"] .overview-panel {
+  background: hsl(40 8% 10% / 0.98);
+  border: 2px solid hsl(40 12% 28%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .panel-header {
+  background: hsl(40 8% 14%);
+  border-bottom: 2px solid hsl(40 12% 25%);
+}
+
+[data-theme="sketch-dark"] .header-glow,
+[data-theme="sketch-dark"] .divider-glow,
+[data-theme="sketch-dark"] .footer-line {
+  display: none;
+}
+
+[data-theme="sketch-dark"] .header-icon {
+  background: none !important;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: hsl(var(--text-secondary));
+  background-clip: unset;
+}
+
+[data-theme="sketch-dark"] .header-badge {
+  background: hsl(40 10% 20%);
+  color: hsl(var(--text-secondary));
+  border-color: hsl(40 12% 30%);
+}
+
+[data-theme="sketch-dark"] .section-icon {
+  background: hsl(40 10% 22%) !important;
+  color: hsl(var(--text-secondary)) !important;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="sketch-dark"] .rank-item {
+  background: hsl(40 8% 15%);
+  border: 1px solid hsl(40 10% 25%);
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-dark"] .rank-item:hover {
+  background: hsl(40 8% 18%);
+}
+
+[data-theme="sketch-dark"] .rank-item.rank-1 {
+  background: hsl(40 10% 18%) !important;
+  border-color: hsl(40 15% 35%);
+}
+
+[data-theme="sketch-dark"] .rank-number {
+  background: hsl(40 8% 20%);
+  border-color: hsl(40 12% 35%);
+  color: hsl(var(--text-secondary)) !important;
+}
+
+[data-theme="sketch-dark"] .rank-1 .rank-number {
+  background: hsl(40 12% 25%);
+  box-shadow: none;
+}
+
+[data-theme="sketch-dark"] .rank-bar-wrapper {
+  background: hsl(40 8% 20%);
+}
+
+[data-theme="sketch-dark"] .rank-bar.cpu-bar,
+[data-theme="sketch-dark"] .rank-bar.memory-bar {
+  background: hsl(40 10% 45%) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="sketch-dark"] .divider-line {
+  background: hsl(40 10% 25%);
+}
+
+[data-theme="sketch-dark"] .footer-dots span {
+  background: hsl(40 10% 30%);
+}
+
+/* ============================================
+   网络模式选择器 - 素描风格
+   ============================================ */
+
+[data-theme="sketch-dark"] .network-badge {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+  color: hsl(var(--text-secondary)) !important;
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .network-badge:hover {
+  background: hsl(40 8% 18%);
+  border-color: hsl(40 15% 35%);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="sketch-dark"] .network-dropdown {
+  background: hsl(40 8% 12% / 0.98);
+  border: 2px solid hsl(40 12% 28%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .network-option {
+  color: hsl(var(--text-secondary));
+  border-radius: var(--sketch-border-radius);
+}
+
+[data-theme="sketch-dark"] .network-option:hover {
+  background: hsl(40 8% 18%);
+}
+
+[data-theme="sketch-dark"] .network-option.active {
+  background: hsl(40 10% 20%) !important;
+  color: hsl(var(--text-primary)) !important;
+}

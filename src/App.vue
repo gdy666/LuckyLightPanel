@@ -124,6 +124,22 @@ onMounted(async () => {
 </script>
 
 <template>
+  <!-- 素描风格 SVG 滤镜定义 -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <!-- 素描滤镜 - 边缘抖动效果 -->
+      <filter id="sketch-filter" filterUnits="objectBoundingBox" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <!-- 素描滤镜 - 悬停时轻微加强 -->
+      <filter id="sketch-filter-hover" filterUnits="objectBoundingBox" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
   <!-- 科技感动态背景 -->
   <TechBackground />
 
