@@ -1,0 +1,58 @@
+/* ============================================
+   Input Components - 输入框样式
+   LightPanel Pro - Cyberpunk Glass Design
+   ============================================ */
+
+/* 霓虹输入框 */
+.input-modern {
+  background: hsl(var(--glass-bg));
+  border: 1px solid hsl(var(--glass-border));
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: hsl(var(--text-primary));
+  transition: all var(--duration-fast) ease;
+  outline: none;
+  backdrop-filter: blur(12px);
+}
+
+.input-modern:focus {
+  border-color: hsl(var(--neon-cyan) / 0.6);
+  box-shadow: 
+    0 0 0 3px hsl(var(--neon-cyan) / 0.1),
+    0 0 20px -5px hsl(var(--neon-cyan) / 0.3);
+}
+
+/* 霓虹开关 */
+.switch-modern {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: hsl(var(--text-muted) / 0.3);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  border: 1px solid transparent;
+}
+
+.switch-modern::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.switch-modern.active {
+  background: linear-gradient(135deg, hsl(var(--neon-cyan)) 0%, hsl(var(--neon-blue)) 100%);
+  border-color: hsl(var(--neon-cyan) / 0.3);
+  box-shadow: 0 0 15px -3px hsl(var(--neon-cyan) / 0.5);
+}
+
+.switch-modern.active::after {
+  transform: translateX(22px);
+}

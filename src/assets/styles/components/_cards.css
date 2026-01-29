@@ -1,0 +1,119 @@
+/* ============================================
+   Card Components - 卡片样式
+   LightPanel Pro - Cyberpunk Glass Design
+   ============================================ */
+
+/* ============ 科技感卡片样式 ============ */
+.glass-card {
+  background: hsl(var(--card-bg));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid hsl(var(--glass-border));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  transition: 
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片高光层 */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-shine);
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) ease;
+}
+
+/* 卡片霓虹边框 */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    hsl(var(--neon-cyan) / 0) 0%,
+    hsl(var(--neon-cyan) / 0.3) 50%,
+    hsl(var(--neon-purple) / 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--duration-normal) ease;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--card-shadow-hover), var(--card-glow-hover);
+  border-color: hsl(var(--neon-cyan) / 0.3);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+/* 霓虹卡片变体 */
+.glass-card-neon {
+  background: hsl(var(--card-bg));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid hsl(var(--neon-cyan) / 0.2);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    var(--card-shadow),
+    0 0 20px -5px hsl(var(--neon-cyan) / 0.3),
+    inset 0 0 20px -10px hsl(var(--neon-cyan) / 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.glass-card-neon:hover {
+  transform: translateY(-8px);
+  border-color: hsl(var(--neon-cyan) / 0.5);
+  box-shadow: 
+    var(--card-shadow-hover),
+    0 0 40px -5px hsl(var(--neon-cyan) / 0.5),
+    0 0 80px -10px hsl(var(--neon-purple) / 0.3),
+    inset 0 0 30px -15px hsl(var(--neon-cyan) / 0.2);
+}
+
+/* 科技感卡片内容容器 */
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 霓虹图标容器 */
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, hsl(var(--neon-cyan)) 0%, hsl(var(--neon-blue)) 100%);
+  color: white;
+  box-shadow: 
+    0 4px 15px -3px hsl(var(--neon-cyan) / 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.glass-card:hover .card-icon {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 
+    0 8px 25px -5px hsl(var(--neon-cyan) / 0.5),
+    0 0 30px -5px hsl(var(--neon-cyan) / 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}

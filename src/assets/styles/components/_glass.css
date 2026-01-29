@@ -1,0 +1,59 @@
+/* ============================================
+   Glass Components - 毛玻璃效果
+   LightPanel Pro - Cyberpunk Glass Design
+   ============================================ */
+
+/* ============ 科技感毛玻璃 ============ */
+.glass {
+  background: hsl(var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid hsl(var(--glass-border));
+  position: relative;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-shine);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* 霓虹边框玻璃 */
+.glass-neon {
+  background: hsl(var(--glass-bg));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-neon::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, 
+    hsl(var(--neon-cyan) / 0.5) 0%, 
+    hsl(var(--neon-purple) / 0.3) 50%,
+    hsl(var(--neon-pink) / 0.5) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.6;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.glass-neon::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: hsl(var(--glass-bg));
+  border-radius: calc(var(--radius-lg) - 1px);
+  z-index: -1;
+}
+
+.glass-neon:hover::before {
+  opacity: 1;
+}
