@@ -186,6 +186,7 @@ export const useConfigStore = defineStore('config', () => {
 
   // 应用服务器配置（作为默认值，仅在没有本地配置时使用）
   // 如果服务器配置不可用或无效，将使用内置默认配置
+  // 注意：background 字段会特殊处理，如果已有服务器背景图片则优先使用
   function applyServerConfig(serverConfig: Record<string, unknown> | null | undefined) {
     // 安全检查：配置不存在或为空
     if (!serverConfig || typeof serverConfig !== 'object' || Object.keys(serverConfig).length === 0) {
@@ -211,6 +212,13 @@ export const useConfigStore = defineStore('config', () => {
     let hasChanges = false
     for (const key of validKeys) {
       if (key in serverConfig && serverConfig[key] !== undefined) {
+        // 特殊处理 background 字段：如果已有服务器背景图片，优先使用服务器背景
+        if (key === 'background' && serverBackgrounds.value.length > 0) {
+          // 已有服务器背景图片链接，跳过服务器配置中的默认背景设置
+          console.log('Server backgrounds exist, skipping default background config')
+          continue
+        }
+        
         try {
           const value = serverConfig[key] as UserConfig[typeof key]
           if (config.value[key] !== value) {
@@ -230,22 +238,29 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   // 设置服务器背景图片
+  // 优先级：服务器背景图片链接 > 预设渐变背景
+  // 如果有服务器背景图片链接，默认使用第一个背景图片
   function setServerBackgrounds(urls: string[]) {
-    serverBackgrounds.value = urls.map((url, index) => ({
+    // 过滤空值
+    const validUrls = urls.filter(url => url && url.trim() !== '')
+    
+    serverBackgrounds.value = validUrls.map((url, index) => ({
       id: `server_${index}`,
       name: `服务器背景 ${index + 1}`,
       type: 'image' as const,
       value: url
     }))
     
-    // 如果没有本地配置且有服务器背景，使用第一个作为默认
-    if (!hasStoredConfig.value && urls.length > 0) {
+    // 如果没有本地配置且有服务器背景图片链接，优先使用第一个背景图片
+    // 这确保了：背景图片链接 > 预设渐变背景
+    if (!hasStoredConfig.value && validUrls.length > 0) {
       config.value.background = 'server_0'
+      console.log('Using server background image as default:', validUrls[0])
       saveConfig()
       return
     }
     
-    // 检查当前背景是否有效
+    // 如果有本地配置，检查当前背景是否有效
     validateCurrentBackground()
   }
 
