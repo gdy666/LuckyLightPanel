@@ -106,6 +106,33 @@
       "label": "显示时间",
       "description": "是否在页头显示当前时间",
       "default": true
+    },
+    "showSearch": {
+      "type": "boolean",
+      "label": "显示搜索栏",
+      "description": "是否在站点页面显示搜索引擎搜索栏",
+      "default": false
+    },
+    "searchEngine": {
+      "type": "select",
+      "label": "搜索引擎",
+      "description": "默认使用的搜索引擎",
+      "default": "bing",
+      "options": [
+        { "value": "bing", "label": "Bing" },
+        { "value": "google", "label": "Google" },
+        { "value": "baidu", "label": "百度" },
+        { "value": "sogou", "label": "搜狗" },
+        { "value": "360", "label": "360搜索" },
+        { "value": "github", "label": "GitHub" },
+        { "value": "custom", "label": "自定义" }
+      ]
+    },
+    "customSearchUrl": {
+      "type": "text",
+      "label": "自定义搜索URL",
+      "description": "自定义搜索引擎的URL，使用{query}代替搜索词",
+      "default": ""
     }
   },
   "presetBackgrounds": [

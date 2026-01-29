@@ -52,6 +52,9 @@ const DEFAULT_CONFIG: UserConfig = {
   luckyServicesLayout: 'normal',
   showDescription: true,
   showTime: true,
+  showSearch: false,
+  searchEngine: 'bing',
+  customSearchUrl: '',
   tabGroups: { ...DEFAULT_TAB_GROUPS },
   networkMode: 'hybrid',
   currentTab: 'sites'
@@ -148,6 +151,9 @@ export const useConfigStore = defineStore('config', () => {
   })
   const showDescription = computed(() => config.value.showDescription)
   const showTime = computed(() => config.value.showTime)
+  const showSearch = computed(() => config.value.showSearch)
+  const searchEngine = computed(() => config.value.searchEngine)
+  const customSearchUrl = computed(() => config.value.customSearchUrl)
   // 当前标签页的搜索关键字
   const currentSearchKeyword = computed(() => {
     const tab = config.value.currentTab
@@ -198,7 +204,8 @@ export const useConfigStore = defineStore('config', () => {
     // 应用配置模板中定义的字段
     const validKeys: (keyof UserConfig)[] = [
       'theme', 'background', 'layout', 'dockerLayout', 'luckyServicesLayout',
-      'networkMode', 'currentTab', 'showDescription', 'showTime'
+      'networkMode', 'currentTab', 'showDescription', 'showTime',
+      'showSearch', 'searchEngine', 'customSearchUrl'
     ]
 
     let hasChanges = false
@@ -393,6 +400,21 @@ export const useConfigStore = defineStore('config', () => {
     }
   }
 
+  // 设置是否显示搜索栏
+  function setShowSearch(show: boolean) {
+    updateConfig('showSearch', show)
+  }
+
+  // 设置搜索引擎
+  function setSearchEngine(engineId: string) {
+    updateConfig('searchEngine', engineId)
+  }
+
+  // 设置自定义搜索引擎 URL
+  function setCustomSearchUrl(url: string) {
+    updateConfig('customSearchUrl', url)
+  }
+
   // 切换设置面板
   function toggleSettingsPanel(open?: boolean) {
     settingsPanelOpen.value = open ?? !settingsPanelOpen.value
@@ -426,6 +448,9 @@ export const useConfigStore = defineStore('config', () => {
     isAllSelected,
     showDescription,
     showTime,
+    showSearch,
+    searchEngine,
+    customSearchUrl,
     currentSearchKeyword,
 
     // 方法
@@ -447,6 +472,9 @@ export const useConfigStore = defineStore('config', () => {
     clearSearchKeyword,
     clearAllSearchKeywords,
     setBackground,
+    setShowSearch,
+    setSearchEngine,
+    setCustomSearchUrl,
     setServerBackgrounds,
     validateCurrentBackground,
     toggleSettingsPanel,

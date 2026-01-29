@@ -529,3 +529,86 @@
   background: hsl(40 10% 20%) !important;
   color: hsl(var(--text-primary)) !important;
 }
+
+/* ============================================
+   搜索栏 - 素描风格 Pro Max
+   ============================================ */
+
+[data-theme="sketch-dark"] .search-bar-container .search-glow {
+  display: none;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-highlight {
+  display: none;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .glass-search {
+  background: hsl(40 8% 15% / 0.95);
+  border: 2px solid hsl(40 12% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .glass-search:hover,
+[data-theme="sketch-dark"] .search-bar-container .glass-search:focus-within {
+  border-color: hsl(40 15% 40%);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.18) !important;
+  transform: translateY(-2px) rotate(-0.3deg);
+}
+
+[data-theme="sketch-dark"] .search-bar-container .engine-selector {
+  border-radius: var(--sketch-border-radius);
+  border-right: 2px solid hsl(40 10% 25%);
+}
+
+[data-theme="sketch-dark"] .search-bar-container .engine-dropdown {
+  background: hsl(40 8% 12% / 0.98);
+  border: 2px solid hsl(40 12% 28%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .engine-option {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-dark"] .search-bar-container .engine-option:hover {
+  background: hsl(40 8% 18%);
+  transform: translateX(2px);
+}
+
+[data-theme="sketch-dark"] .search-bar-container .engine-option.active {
+  background: hsl(40 10% 20%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-input {
+  color: hsl(var(--text-primary));
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-btn {
+  background: hsl(40 10% 30%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-btn .btn-bg {
+  display: none;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .search-btn:hover {
+  background: hsl(40 12% 35%);
+  transform: scale(1) translateY(-1px);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.18) !important;
+}
+
+[data-theme="sketch-dark"] .search-bar-container .header-icon {
+  animation: none;
+}

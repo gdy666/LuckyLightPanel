@@ -529,3 +529,86 @@
   background: hsl(45 22% 88%) !important;
   color: hsl(var(--text-primary)) !important;
 }
+
+/* ============================================
+   搜索栏 - 素描风格 Pro Max
+   ============================================ */
+
+[data-theme="sketch-light"] .search-bar-container .search-glow {
+  display: none;
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-highlight {
+  display: none;
+}
+
+[data-theme="sketch-light"] .search-bar-container .glass-search {
+  background: hsl(45 28% 95% / 0.95);
+  border: 2px solid hsl(40 18% 72%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.12), 3px 3px 0 rgba(120, 100, 80, 0.06);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .search-bar-container .glass-search:hover,
+[data-theme="sketch-light"] .search-bar-container .glass-search:focus-within {
+  border-color: hsl(40 22% 60%);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.15), 4px 4px 0 rgba(120, 100, 80, 0.08) !important;
+  transform: translateY(-2px) rotate(-0.3deg);
+}
+
+[data-theme="sketch-light"] .search-bar-container .engine-selector {
+  border-radius: var(--sketch-border-radius);
+  border-right: 2px solid hsl(40 15% 78%);
+}
+
+[data-theme="sketch-light"] .search-bar-container .engine-dropdown {
+  background: hsl(45 30% 96% / 0.98);
+  border: 2px solid hsl(40 18% 70%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 4px 4px 0 rgba(120, 100, 80, 0.15);
+  backdrop-filter: none;
+}
+
+[data-theme="sketch-light"] .search-bar-container .engine-option {
+  border-radius: var(--sketch-border-radius);
+  color: hsl(var(--text-secondary));
+}
+
+[data-theme="sketch-light"] .search-bar-container .engine-option:hover {
+  background: hsl(45 25% 90%);
+  transform: translateX(2px);
+}
+
+[data-theme="sketch-light"] .search-bar-container .engine-option.active {
+  background: hsl(45 22% 88%) !important;
+  color: hsl(var(--text-primary)) !important;
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-input {
+  color: hsl(var(--text-primary));
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-btn {
+  background: hsl(40 20% 70%);
+  border-radius: var(--sketch-border-radius);
+  box-shadow: 2px 2px 0 rgba(120, 100, 80, 0.15);
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-btn .btn-bg {
+  display: none;
+}
+
+[data-theme="sketch-light"] .search-bar-container .search-btn:hover {
+  background: hsl(40 22% 60%);
+  transform: scale(1) translateY(-1px);
+  box-shadow: 3px 3px 0 rgba(120, 100, 80, 0.18) !important;
+}
+
+[data-theme="sketch-light"] .search-bar-container .header-icon {
+  animation: none;
+}

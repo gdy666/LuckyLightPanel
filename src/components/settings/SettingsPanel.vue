@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useConfigStore, PRESET_BACKGROUNDS } from '@/stores/config'
-import { X, Sun, Moon, Pencil, RotateCcw, Palette, Eye, Check, Image, Github } from 'lucide-vue-next'
+import { X, Sun, Moon, Pencil, RotateCcw, Palette, Eye, Check, Image, Github, Search, Globe } from 'lucide-vue-next'
 import type { ThemeMode } from '@/types'
+
+// 导入本地图标
+import iconBing from '@/assets/icons/bing.png'
+import iconGoogle from '@/assets/icons/google.ico'
+import iconBaidu from '@/assets/icons/baidu.ico'
+import iconSogou from '@/assets/icons/sogou.ico'
+import icon360 from '@/assets/icons/so.ico'
+import iconGithub from '@/assets/icons/github.ico'
 
 const configStore = useConfigStore()
 
@@ -27,6 +35,24 @@ const themeOptions: { value: ThemeMode; label: string; icon: typeof Sun; color: 
 const isSketchTheme = computed(() => 
   configStore.theme === 'sketch-light' || configStore.theme === 'sketch-dark'
 )
+
+// 搜索引擎选项（与 SearchBar.vue 保持一致）
+const SEARCH_ENGINES = [
+  { id: 'bing', name: 'Bing', icon: iconBing },
+  { id: 'google', name: 'Google', icon: iconGoogle },
+  { id: 'baidu', name: '百度', icon: iconBaidu },
+  { id: 'sogou', name: '搜狗', icon: iconSogou },
+  { id: '360', name: '360搜索', icon: icon360 },
+  { id: 'github', name: 'GitHub', icon: iconGithub }
+]
+
+// 自定义搜索 URL 输入
+const customSearchUrlInput = ref(configStore.customSearchUrl)
+
+// 保存自定义搜索 URL
+function saveCustomSearchUrl() {
+  configStore.setCustomSearchUrl(customSearchUrlInput.value)
+}
 
 </script>
 
@@ -182,6 +208,73 @@ const isSketchTheme = computed(() =>
               />
             </label>
           </div>
+        </section>
+
+        <!-- 搜索设置 -->
+        <section class="settings-section">
+          <div class="section-header">
+            <Search class="section-icon cyan" />
+            <h3 class="section-title">搜索</h3>
+          </div>
+          
+          <!-- 显示搜索栏开关 -->
+          <div class="toggle-options">
+            <label class="toggle-item">
+              <span class="toggle-label">显示搜索栏</span>
+              <div 
+                class="switch-modern"
+                :class="{ active: configStore.showSearch }"
+                @click="configStore.updateConfig('showSearch', !configStore.showSearch)"
+              />
+            </label>
+          </div>
+          
+          <!-- 搜索引擎选择 -->
+          <template v-if="configStore.showSearch">
+            <div class="section-header sub-header">
+              <Globe class="section-icon purple" />
+              <h4 class="section-subtitle">搜索引擎</h4>
+            </div>
+            <div class="engine-grid">
+              <button
+                v-for="engine in SEARCH_ENGINES"
+                :key="engine.id"
+                class="engine-option-btn"
+                :class="{ active: configStore.searchEngine === engine.id }"
+                @click="configStore.setSearchEngine(engine.id)"
+              >
+                <img :src="engine.icon" :alt="engine.name" class="engine-icon-img" />
+                <span class="engine-name">{{ engine.name }}</span>
+                <Check v-if="configStore.searchEngine === engine.id" class="engine-check" />
+              </button>
+            </div>
+            
+            <!-- 自定义搜索引擎 -->
+            <div class="custom-engine-section">
+              <button
+                class="engine-option-btn custom-btn"
+                :class="{ active: configStore.searchEngine === 'custom' }"
+                @click="configStore.setSearchEngine('custom')"
+              >
+                <span class="engine-icon">⚡</span>
+                <span class="engine-name">自定义</span>
+                <Check v-if="configStore.searchEngine === 'custom'" class="engine-check" />
+              </button>
+              
+              <!-- 自定义 URL 输入框 -->
+              <div v-if="configStore.searchEngine === 'custom'" class="custom-url-input">
+                <input 
+                  v-model="customSearchUrlInput"
+                  type="text"
+                  class="url-input"
+                  placeholder="输入搜索 URL，用 {query} 代替搜索词"
+                  @blur="saveCustomSearchUrl"
+                  @keyup.enter="saveCustomSearchUrl"
+                />
+                <p class="url-hint">例如: https://www.bing.com/search?q={query}</p>
+              </div>
+            </div>
+          </template>
         </section>
       </div>
 
@@ -533,6 +626,104 @@ const isSketchTheme = computed(() =>
   font-size: 0.875rem;
   color: hsl(var(--text-secondary));
 }
+
+/* 搜索引擎网格 */
+.engine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.engine-option-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid hsl(var(--glass-border));
+  background: hsl(var(--glass-bg));
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.engine-option-btn:hover {
+  background: hsl(var(--glass-bg-hover));
+  border-color: hsl(var(--neon-cyan) / 0.3);
+}
+
+.engine-option-btn.active {
+  border-color: hsl(var(--neon-cyan) / 0.5);
+  background: hsl(var(--neon-cyan) / 0.1);
+}
+
+.engine-icon-img {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.engine-name {
+  flex: 1;
+  font-size: 0.75rem;
+  color: hsl(var(--text-secondary));
+  text-align: left;
+}
+
+.engine-option-btn.active .engine-name {
+  color: hsl(var(--neon-cyan));
+}
+
+.engine-check {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: hsl(var(--neon-cyan));
+}
+
+/* 自定义搜索引擎 */
+.custom-engine-section {
+  margin-top: 0.75rem;
+}
+
+.custom-btn {
+  width: 100%;
+}
+
+.custom-url-input {
+  margin-top: 0.625rem;
+}
+
+.url-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  border: 1px solid hsl(var(--glass-border));
+  background: hsl(var(--glass-bg));
+  color: hsl(var(--text-primary));
+  font-size: 0.8125rem;
+  outline: none;
+  transition: all 200ms;
+}
+
+.url-input:focus {
+  border-color: hsl(var(--neon-cyan) / 0.5);
+  box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.1);
+}
+
+.url-input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+.url-hint {
+  margin-top: 0.375rem;
+  font-size: 0.6875rem;
+  color: hsl(var(--text-muted));
+}
+
+/* 图标颜色 */
+.section-icon.cyan { color: hsl(var(--neon-cyan)); }
+.section-icon.purple { color: hsl(var(--neon-purple)); }
 
 /* 底部 */
 .panel-footer {

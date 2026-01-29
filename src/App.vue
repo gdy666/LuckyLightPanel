@@ -13,6 +13,7 @@ import ServiceGrid from '@/components/luckyServices/ServiceGrid.vue'
 import SettingsPanel from '@/components/settings/SettingsPanel.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import LinkDropdown from '@/components/common/LinkDropdown.vue'
+import SearchBar from '@/components/common/SearchBar.vue'
 
 const navStore = useNavStore()
 const configStore = useConfigStore()
@@ -162,6 +163,9 @@ onMounted(async () => {
   <div v-else class="app-main">
     <!-- 页头 -->
     <AppHeader />
+
+    <!-- 搜索栏（仅在站点页面显示） -->
+    <SearchBar v-if="configStore.showSearch && currentTab === 'sites'" />
 
     <!-- 主区域 -->
     <main class="main-content">

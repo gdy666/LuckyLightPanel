@@ -194,6 +194,14 @@ export interface TabSearchKeywords {
   luckyServices: string
 }
 
+/** 搜索引擎 */
+export interface SearchEngine {
+  id: string
+  name: string
+  url: string
+  icon: string
+}
+
 /** 用户配置 */
 export interface UserConfig {
   theme: ThemeMode
@@ -204,6 +212,9 @@ export interface UserConfig {
   luckyServicesLayout: LayoutMode
   showDescription: boolean
   showTime: boolean
+  showSearch: boolean
+  searchEngine: string
+  customSearchUrl: string
   tabGroups: TabGroups
   networkMode: NetworkMode
   currentTab: TabType
