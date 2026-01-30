@@ -353,7 +353,7 @@ function getGroupIconClass(icon?: string): string {
 .group-title {
   font-size: 1.125rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: hsl(var(--text-secondary));
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -366,7 +366,7 @@ function getGroupIconClass(icon?: string): string {
 
 .group-count {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: hsl(var(--text-muted));
   font-weight: 400;
 }
 
