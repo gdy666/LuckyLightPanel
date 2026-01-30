@@ -11,25 +11,25 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "pinia": "^2.3.0",
-    "@vueuse/core": "^12.4.0",
+    "@vueuse/core": "^12.8.2",
+    "lucide-vue-next": "^0.469.0",
     "motion-v": "^1.10.2",
+    "pinia": "^2.3.1",
     "radix-vue": "^1.9.17",
-    "lucide-vue-next": "^0.469.0"
+    "vue": "^3.5.27",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "vite": "^6.0.5",
-    "vue-tsc": "^2.2.0",
-    "typescript": "~5.7.2",
-    "@types/node": "^22.10.5",
-    "eslint": "^9.17.0",
-    "eslint-plugin-vue": "^9.32.0",
-    "@typescript-eslint/eslint-plugin": "^8.19.1",
-    "@typescript-eslint/parser": "^8.19.1",
-    "prettier": "^3.4.2"
+    "@types/node": "^22.19.7",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^9.33.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.7.3",
+    "vite": "^6.4.1",
+    "vue-tsc": "^2.2.12"
   },
   "engines": {
     "node": ">=20.0.0"
