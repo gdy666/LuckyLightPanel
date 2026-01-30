@@ -210,7 +210,8 @@ const cardClass = computed(() => {
             <div 
               class="icon-box"
               :style="{ 
-                boxShadow: `0 4px 20px -4px hsl(var(--icon-placeholder-bg) / 0.5)` 
+                background: `linear-gradient(135deg, hsl(${typeConfig.color}), hsl(var(--neon-cyan)))`,
+                boxShadow: `0 4px 20px -4px hsl(${typeConfig.shadow} / 0.5)` 
               }"
             >
               <component :is="typeConfig.icon" class="icon-default" />
@@ -340,7 +341,8 @@ const cardClass = computed(() => {
           <div 
             class="compact-icon"
             :style="{ 
-              boxShadow: `0 2px 12px -2px hsl(var(--icon-placeholder-bg) / 0.4)` 
+              background: `linear-gradient(135deg, hsl(${typeConfig.color}), hsl(var(--neon-cyan)))`,
+              boxShadow: `0 2px 12px -2px hsl(${typeConfig.shadow} / 0.4)` 
             }"
           >
             <component :is="typeConfig.icon" class="icon-default-sm" />
@@ -396,7 +398,8 @@ const cardClass = computed(() => {
         <div 
           class="list-icon"
           :style="{ 
-            boxShadow: `0 2px 10px -2px hsl(var(--icon-placeholder-bg) / 0.4)` 
+            background: `linear-gradient(135deg, hsl(${typeConfig.color}), hsl(var(--neon-cyan)))`,
+            boxShadow: `0 2px 10px -2px hsl(${typeConfig.shadow} / 0.4)` 
           }"
         >
           <component :is="typeConfig.icon" class="icon-default-sm" />
@@ -484,7 +487,8 @@ const cardClass = computed(() => {
         <div 
           class="minimal-icon"
           :style="{ 
-            boxShadow: `0 3px 15px -3px hsl(var(--icon-placeholder-bg) / 0.5)` 
+            background: `linear-gradient(135deg, hsl(${typeConfig.color}), hsl(var(--neon-cyan)))`,
+            boxShadow: `0 3px 15px -3px hsl(${typeConfig.shadow} / 0.5)` 
           }"
         >
           <component :is="typeConfig.icon" class="icon-default-md" />
@@ -653,8 +657,6 @@ const cardClass = computed(() => {
   overflow: hidden;
   filter: brightness(var(--icon-brightness, 1));
   position: relative;
-  /* 使用主题适配的背景色 */
-  background: hsl(var(--icon-placeholder-bg));
 }
 
 .icon-box::after {
@@ -978,8 +980,6 @@ const cardClass = computed(() => {
   flex-shrink: 0;
   filter: brightness(var(--icon-brightness, 1));
   position: relative;
-  /* 使用主题适配的背景色 */
-  background: hsl(var(--icon-placeholder-bg));
 }
 
 .compact-icon::after {
@@ -1168,8 +1168,6 @@ const cardClass = computed(() => {
   flex-shrink: 0;
   filter: brightness(var(--icon-brightness, 1));
   position: relative;
-  /* 使用主题适配的背景色 */
-  background: hsl(var(--icon-placeholder-bg));
 }
 
 .list-icon::after {
@@ -1385,8 +1383,6 @@ const cardClass = computed(() => {
   position: relative;
   transition: transform 300ms var(--ease-spring);
   filter: brightness(var(--icon-brightness, 1));
-  /* 使用主题适配的背景色 */
-  background: hsl(var(--icon-placeholder-bg));
 }
 
 .minimal-icon::after {

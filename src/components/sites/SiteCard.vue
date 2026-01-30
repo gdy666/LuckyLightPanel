@@ -209,18 +209,35 @@ const showDesc = computed(() => configStore.showDescription && props.site.descri
 // 布局模式
 const layout = computed(() => configStore.layout)
 
-// 霓虹渐变色组
+// 霓虹渐变色组（用于无图标时的首字母背景）
 const neonGradients = [
   { from: 'var(--neon-cyan)', to: 'var(--neon-blue)', shadow: 'var(--neon-cyan)' },
-  { from: 'var(--neon-purple)', to: 'var(--neon-pink)', shadow: 'var(--neon-purple)' },
+  { from: 'var(--neon-purple)', to: 'var(--neon-blue)', shadow: 'var(--neon-purple)' },
   { from: 'var(--neon-green)', to: 'var(--neon-cyan)', shadow: 'var(--neon-green)' },
-  { from: 'var(--neon-pink)', to: 'var(--neon-purple)', shadow: 'var(--neon-pink)' },
   { from: 'var(--neon-blue)', to: 'var(--neon-purple)', shadow: 'var(--neon-blue)' },
+  { from: 'var(--neon-cyan)', to: 'var(--neon-green)', shadow: 'var(--neon-cyan)' },
 ]
 
-const cardGradient = computed(() => {
+// 无图标时的渐变色（基于名称首字母）
+const fallbackGradient = computed(() => {
   const index = props.site.name.charCodeAt(0) % neonGradients.length
   return neonGradients[index]
+})
+
+// 图标背景样式
+const iconBgStyle = computed(() => {
+  if (iconUrl.value) {
+    // 有图标：使用主题适配的中性背景
+    return {
+      boxShadow: `0 4px 20px -4px hsl(var(--icon-placeholder-bg) / 0.5)`
+    }
+  } else {
+    // 无图标：使用彩色渐变背景
+    return {
+      background: `linear-gradient(135deg, hsl(${fallbackGradient.value.from}) 0%, hsl(${fallbackGradient.value.to}) 100%)`,
+      boxShadow: `0 4px 20px -4px hsl(${fallbackGradient.value.shadow} / 0.5)`
+    }
+  }
 })
 
 // 卡片类名
@@ -251,7 +268,7 @@ const iconClass = computed(() => {
     <!-- 霓虹边框效果 -->
     <div 
       class="card-glow"
-      :style="{ '--shadow-color': `hsl(${cardGradient.shadow})` }"
+      :style="{ '--shadow-color': `hsl(var(--icon-placeholder-bg))` }"
     />
     
     <!-- 边框发光线 -->
@@ -261,7 +278,7 @@ const iconClass = computed(() => {
     <div 
       class="card-bg-glow"
       :style="{
-        background: `linear-gradient(135deg, hsl(${cardGradient.from}) 0%, hsl(${cardGradient.to}) 100%)`
+        background: `hsl(var(--icon-placeholder-bg))`
       }"
     />
     
@@ -270,9 +287,7 @@ const iconClass = computed(() => {
       <!-- 图标 -->
       <div
         :class="iconClass"
-        :style="{
-          boxShadow: `0 4px 20px -4px hsl(var(--icon-placeholder-bg) / 0.5)`
-        }"
+        :style="iconBgStyle"
       >
         <img
           v-if="iconUrl"

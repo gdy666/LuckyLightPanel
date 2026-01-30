@@ -175,6 +175,64 @@ const cardClass = computed(() => {
   else classes.push('layout-normal')
   return classes.join(' ')
 })
+
+// 图标背景样式（根据是否有自定义图标区分）
+const iconBgStyle = computed(() => {
+  if (props.container.iconUrl) {
+    // 有图标：使用主题适配的中性背景
+    return {
+      boxShadow: `0 4px 20px -4px hsl(var(--icon-placeholder-bg) / 0.5)`
+    }
+  } else {
+    // 无图标：使用状态颜色渐变背景
+    return {
+      background: `linear-gradient(135deg, ${stateConfig.value.color}, hsl(var(--docker-orange)))`,
+      boxShadow: `0 4px 20px -4px hsl(${stateConfig.value.shadow} / 0.5)`
+    }
+  }
+})
+
+// 紧凑布局图标背景样式
+const compactIconBgStyle = computed(() => {
+  if (props.container.iconUrl) {
+    return {
+      boxShadow: `0 2px 12px -2px hsl(var(--icon-placeholder-bg) / 0.4)`
+    }
+  } else {
+    return {
+      background: `linear-gradient(135deg, ${stateConfig.value.color}, hsl(var(--docker-orange)))`,
+      boxShadow: `0 2px 12px -2px hsl(${stateConfig.value.shadow} / 0.4)`
+    }
+  }
+})
+
+// 列表布局图标背景样式
+const listIconBgStyle = computed(() => {
+  if (props.container.iconUrl) {
+    return {
+      boxShadow: `0 2px 10px -2px hsl(var(--icon-placeholder-bg) / 0.4)`
+    }
+  } else {
+    return {
+      background: `linear-gradient(135deg, ${stateConfig.value.color}, hsl(var(--docker-orange)))`,
+      boxShadow: `0 2px 10px -2px hsl(${stateConfig.value.shadow} / 0.4)`
+    }
+  }
+})
+
+// 极简布局图标背景样式
+const minimalIconBgStyle = computed(() => {
+  if (props.container.iconUrl) {
+    return {
+      boxShadow: `0 3px 15px -3px hsl(var(--icon-placeholder-bg) / 0.5)`
+    }
+  } else {
+    return {
+      background: `linear-gradient(135deg, ${stateConfig.value.color}, hsl(var(--docker-orange)))`,
+      boxShadow: `0 3px 15px -3px hsl(${stateConfig.value.shadow} / 0.5)`
+    }
+  }
+})
 </script>
 
 <template>
@@ -205,9 +263,7 @@ const cardClass = computed(() => {
           <div class="icon-wrapper">
             <div 
               class="icon-box"
-              :style="{ 
-                boxShadow: `0 4px 20px -4px hsl(var(--icon-placeholder-bg) / 0.5)` 
-              }"
+              :style="iconBgStyle"
             >
               <img
                 v-if="container.iconUrl"
@@ -330,9 +386,7 @@ const cardClass = computed(() => {
         <div class="compact-header">
           <div 
             class="compact-icon"
-            :style="{ 
-              boxShadow: `0 2px 12px -2px hsl(var(--icon-placeholder-bg) / 0.4)` 
-            }"
+            :style="compactIconBgStyle"
           >
             <img
               v-if="container.iconUrl"
@@ -378,9 +432,7 @@ const cardClass = computed(() => {
       <div class="card-inner-list">
         <div 
           class="list-icon"
-          :style="{ 
-            boxShadow: `0 2px 10px -2px hsl(var(--icon-placeholder-bg) / 0.4)` 
-          }"
+          :style="listIconBgStyle"
         >
           <img
             v-if="container.iconUrl"
@@ -462,9 +514,7 @@ const cardClass = computed(() => {
       <div class="card-inner-minimal">
         <div 
           class="minimal-icon"
-          :style="{ 
-            boxShadow: `0 3px 15px -3px hsl(var(--icon-placeholder-bg) / 0.5)` 
-          }"
+          :style="minimalIconBgStyle"
         >
           <img
             v-if="container.iconUrl"
