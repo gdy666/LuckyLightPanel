@@ -78,36 +78,96 @@ onUnmounted(() => {
           <div class="layout-preview" :class="`preview-${option.icon}`">
             <template v-if="option.icon === 'card'">
               <div class="preview-card">
-                <div class="preview-icon-lg"></div>
-                <div class="preview-lines">
-                  <div class="preview-line"></div>
-                  <div class="preview-line short"></div>
+                <div class="preview-card-icon">
+                  <div class="card-icon-inner"></div>
+                </div>
+                <div class="preview-card-content">
+                  <div class="card-title-bar"></div>
+                  <div class="card-desc-bar"></div>
+                  <div class="card-meta">
+                    <div class="card-status-dot"></div>
+                    <div class="card-badge"></div>
+                  </div>
                 </div>
               </div>
             </template>
             <template v-else-if="option.icon === 'compact'">
               <div class="preview-compact">
-                <div class="preview-item-sm"></div>
-                <div class="preview-item-sm"></div>
-                <div class="preview-item-sm"></div>
-                <div class="preview-item-sm"></div>
+                <div class="compact-item">
+                  <div class="compact-icon"></div>
+                  <div class="compact-lines">
+                    <div class="compact-line"></div>
+                    <div class="compact-line short"></div>
+                  </div>
+                </div>
+                <div class="compact-item">
+                  <div class="compact-icon"></div>
+                  <div class="compact-lines">
+                    <div class="compact-line"></div>
+                    <div class="compact-line short"></div>
+                  </div>
+                </div>
+                <div class="compact-item">
+                  <div class="compact-icon"></div>
+                  <div class="compact-lines">
+                    <div class="compact-line"></div>
+                    <div class="compact-line short"></div>
+                  </div>
+                </div>
+                <div class="compact-item">
+                  <div class="compact-icon"></div>
+                  <div class="compact-lines">
+                    <div class="compact-line"></div>
+                    <div class="compact-line short"></div>
+                  </div>
+                </div>
               </div>
             </template>
             <template v-else-if="option.icon === 'list'">
               <div class="preview-list">
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
-                <div class="preview-row"></div>
+                <div class="list-row">
+                  <div class="list-icon"></div>
+                  <div class="list-text"></div>
+                  <div class="list-badge"></div>
+                </div>
+                <div class="list-row">
+                  <div class="list-icon"></div>
+                  <div class="list-text"></div>
+                  <div class="list-badge"></div>
+                </div>
+                <div class="list-row">
+                  <div class="list-icon"></div>
+                  <div class="list-text"></div>
+                  <div class="list-badge"></div>
+                </div>
               </div>
             </template>
             <template v-else-if="option.icon === 'minimal'">
               <div class="preview-minimal">
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
+                <div class="minimal-cell">
+                  <div class="minimal-icon"></div>
+                  <div class="minimal-dot"></div>
+                </div>
               </div>
             </template>
           </div>
@@ -209,79 +269,170 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  width: 72px;
+  width: 76px;
   padding: 10px 8px;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
-  border-radius: 10px;
-  color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.layout-option::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 0%, rgba(6, 182, 212, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .layout-option:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.layout-option:hover::before {
+  opacity: 1;
 }
 
 .layout-option.active {
-  background: rgba(6, 182, 212, 0.15);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(139, 92, 246, 0.08) 100%);
+  border-color: rgba(6, 182, 212, 0.35);
   color: #06b6d4;
+  box-shadow: 
+    0 0 20px -5px rgba(6, 182, 212, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.layout-option.active::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #06b6d4;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
 }
 
 .layout-option.active .layout-preview {
-  border-color: rgba(6, 182, 212, 0.4);
-  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.5);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  box-shadow: 0 0 12px -3px rgba(6, 182, 212, 0.3);
+}
+
+.layout-option.active .layout-preview::before {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
 }
 
 /* 布局预览框 */
 .layout-preview {
-  width: 48px;
-  height: 36px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(0, 0, 0, 0.2);
+  width: 52px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.15) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  transition: all 0.15s ease;
+  padding: 5px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
 }
 
-/* 卡片布局预览 */
+.layout-preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.layout-option:hover .layout-preview {
+  transform: scale(1.05);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* ============ 卡片布局预览 ============ */
 .preview-card {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 5px;
   width: 100%;
-  padding: 2px;
+  height: 100%;
 }
 
-.preview-icon-lg {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  background: rgba(6, 182, 212, 0.5);
+.preview-card-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.7) 0%, rgba(139, 92, 246, 0.5) 100%);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(6, 182, 212, 0.3);
 }
 
-.preview-lines {
+.card-icon-inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.preview-card-content {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   flex: 1;
+  min-width: 0;
 }
 
-.preview-line {
+.card-title-bar {
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.card-desc-bar {
   height: 3px;
-  border-radius: 1px;
-  background: rgba(255, 255, 255, 0.3);
+  width: 70%;
+  border-radius: 1.5px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.preview-line.short {
-  width: 60%;
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 1px;
 }
 
-/* 紧凑布局预览 */
+.card-status-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
+}
+
+.card-badge {
+  height: 3px;
+  width: 12px;
+  border-radius: 1.5px;
+  background: rgba(6, 182, 212, 0.4);
+}
+
+/* ============ 紧凑布局预览 ============ */
 .preview-compact {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -290,38 +441,115 @@ onUnmounted(() => {
   height: 100%;
 }
 
-.preview-item-sm {
+.compact-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px;
   border-radius: 3px;
-  background: rgba(6, 182, 212, 0.4);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* 列表布局预览 */
+.compact-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.6) 0%, rgba(139, 92, 246, 0.4) 100%);
+  flex-shrink: 0;
+}
+
+.compact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.compact-line {
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.compact-line.short {
+  width: 60%;
+}
+
+/* ============ 列表布局预览 ============ */
 .preview-list {
   display: flex;
   flex-direction: column;
   gap: 3px;
   width: 100%;
+  height: 100%;
+  justify-content: center;
 }
 
-.preview-row {
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.list-icon {
+  width: 6px;
   height: 6px;
   border-radius: 2px;
-  background: rgba(6, 182, 212, 0.4);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.6) 0%, rgba(139, 92, 246, 0.4) 100%);
+  flex-shrink: 0;
 }
 
-/* 极简布局预览 */
+.list-text {
+  flex: 1;
+  height: 3px;
+  border-radius: 1.5px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.list-badge {
+  width: 8px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: rgba(34, 197, 94, 0.5);
+  flex-shrink: 0;
+}
+
+/* ============ 极简布局预览 ============ */
 .preview-minimal {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  padding: 2px;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
 }
 
-.preview-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  background: rgba(6, 182, 212, 0.5);
+.minimal-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+}
+
+.minimal-icon {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.5) 0%, rgba(139, 92, 246, 0.3) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.minimal-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 3px rgba(34, 197, 94, 0.5);
 }
 
 /* 布局标签 */
@@ -331,7 +559,7 @@ onUnmounted(() => {
   white-space: nowrap;
 }
 
-/* 浅色主题适配 */
+/* ============ 浅色主题适配 ============ */
 [data-theme="light"] .layout-badge {
   background: rgba(255, 255, 255, 0.6);
   border-color: rgba(0, 0, 0, 0.08);
@@ -357,36 +585,71 @@ onUnmounted(() => {
   color: rgba(0, 0, 0, 0.75);
 }
 
+[data-theme="light"] .layout-option::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(6, 182, 212, 0.08) 100%);
+}
+
 [data-theme="light"] .layout-option:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .layout-option.active {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.06) 100%);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 
+    0 0 20px -5px rgba(6, 182, 212, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .layout-option.active .layout-preview {
+  border-color: rgba(6, 182, 212, 0.5);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+  box-shadow: 0 0 12px -3px rgba(6, 182, 212, 0.25);
 }
 
 [data-theme="light"] .layout-preview {
   border-color: rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.02) 100%);
+}
+
+[data-theme="light"] .layout-preview::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, transparent 50%);
+}
+
+[data-theme="light"] .card-title-bar {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .card-desc-bar {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .card-badge {
+  background: rgba(6, 182, 212, 0.5);
+}
+
+[data-theme="light"] .compact-item {
   background: rgba(0, 0, 0, 0.03);
 }
 
-[data-theme="light"] .preview-line {
-  background: rgba(0, 0, 0, 0.2);
+[data-theme="light"] .compact-line {
+  background: rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="light"] .preview-icon-lg {
-  background: rgba(6, 182, 212, 0.7);
+[data-theme="light"] .list-row {
+  background: rgba(0, 0, 0, 0.03);
 }
 
-[data-theme="light"] .preview-item-sm {
-  background: rgba(6, 182, 212, 0.5);
+[data-theme="light"] .list-text {
+  background: rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="light"] .preview-row {
-  background: rgba(6, 182, 212, 0.5);
+[data-theme="light"] .minimal-icon {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.6) 0%, rgba(139, 92, 246, 0.4) 100%);
 }
 
-[data-theme="light"] .preview-dot {
-  background: rgba(6, 182, 212, 0.6);
-}
-
-/* 素描浅色主题适配 */
+/* ============ 素描浅色主题适配 ============ */
 [data-theme="sketch-light"] .layout-badge {
   background: rgba(255, 255, 255, 0.5);
   border-color: rgba(0, 0, 0, 0.12);
@@ -412,36 +675,105 @@ onUnmounted(() => {
   color: rgba(60, 50, 40, 0.85);
 }
 
+[data-theme="sketch-light"] .layout-option::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(60, 50, 40, 0.05) 100%);
+}
+
 [data-theme="sketch-light"] .layout-option:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="sketch-light"] .layout-option.active {
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.08) 0%, rgba(80, 70, 60, 0.04) 100%);
+  border-color: rgba(60, 50, 40, 0.25);
+  color: rgba(60, 50, 40, 1);
+  box-shadow: 
+    0 0 15px -5px rgba(60, 50, 40, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="sketch-light"] .layout-option.active::after {
+  background: rgba(60, 50, 40, 0.6);
+  box-shadow: 0 0 6px rgba(60, 50, 40, 0.4);
+}
+
+[data-theme="sketch-light"] .layout-option.active .layout-preview {
+  border-color: rgba(60, 50, 40, 0.3);
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.06) 0%, rgba(80, 70, 60, 0.03) 100%);
+  box-shadow: 0 0 10px -3px rgba(60, 50, 40, 0.2);
 }
 
 [data-theme="sketch-light"] .layout-preview {
   border-color: rgba(0, 0, 0, 0.12);
-  background: rgba(0, 0, 0, 0.04);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
 }
 
-[data-theme="sketch-light"] .preview-line {
-  background: rgba(60, 50, 40, 0.25);
+[data-theme="sketch-light"] .layout-preview::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
 }
 
-[data-theme="sketch-light"] .preview-icon-lg {
-  background: rgba(60, 50, 40, 0.35);
+[data-theme="sketch-light"] .preview-card-icon {
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.5) 0%, rgba(80, 70, 60, 0.3) 100%);
+  box-shadow: 0 2px 4px rgba(60, 50, 40, 0.2);
 }
 
-[data-theme="sketch-light"] .preview-item-sm {
-  background: rgba(60, 50, 40, 0.25);
-}
-
-[data-theme="sketch-light"] .preview-row {
-  background: rgba(60, 50, 40, 0.25);
-}
-
-[data-theme="sketch-light"] .preview-dot {
+[data-theme="sketch-light"] .card-title-bar {
   background: rgba(60, 50, 40, 0.3);
 }
 
-/* 素描深色主题适配 */
+[data-theme="sketch-light"] .card-desc-bar {
+  background: rgba(60, 50, 40, 0.15);
+}
+
+[data-theme="sketch-light"] .card-status-dot {
+  background: rgba(60, 50, 40, 0.4);
+  box-shadow: none;
+}
+
+[data-theme="sketch-light"] .card-badge {
+  background: rgba(60, 50, 40, 0.25);
+}
+
+[data-theme="sketch-light"] .compact-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="sketch-light"] .compact-icon {
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.4) 0%, rgba(80, 70, 60, 0.2) 100%);
+}
+
+[data-theme="sketch-light"] .compact-line {
+  background: rgba(60, 50, 40, 0.2);
+}
+
+[data-theme="sketch-light"] .list-row {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="sketch-light"] .list-icon {
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.4) 0%, rgba(80, 70, 60, 0.2) 100%);
+}
+
+[data-theme="sketch-light"] .list-text {
+  background: rgba(60, 50, 40, 0.2);
+}
+
+[data-theme="sketch-light"] .list-badge {
+  background: rgba(60, 50, 40, 0.25);
+}
+
+[data-theme="sketch-light"] .minimal-icon {
+  background: linear-gradient(135deg, rgba(60, 50, 40, 0.35) 0%, rgba(80, 70, 60, 0.2) 100%);
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.15);
+}
+
+[data-theme="sketch-light"] .minimal-dot {
+  background: rgba(60, 50, 40, 0.35);
+  box-shadow: none;
+}
+
+/* ============ 素描深色主题适配 ============ */
 [data-theme="sketch-dark"] .layout-dropdown {
   background: rgba(35, 30, 25, 0.95);
   border-color: rgba(255, 255, 255, 0.08);
@@ -450,29 +782,106 @@ onUnmounted(() => {
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
+[data-theme="sketch-dark"] .layout-option {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="sketch-dark"] .layout-option::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+[data-theme="sketch-dark"] .layout-option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="sketch-dark"] .layout-option.active {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 15px -5px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="sketch-dark"] .layout-option.active::after {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="sketch-dark"] .layout-option.active .layout-preview {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.03) 100%);
+  box-shadow: 0 0 10px -3px rgba(255, 255, 255, 0.15);
+}
+
 [data-theme="sketch-dark"] .layout-preview {
   border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
 }
 
-[data-theme="sketch-dark"] .preview-line {
-  background: rgba(255, 255, 255, 0.2);
+[data-theme="sketch-dark"] .layout-preview::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
 }
 
-[data-theme="sketch-dark"] .preview-icon-lg {
+[data-theme="sketch-dark"] .preview-card-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="sketch-dark"] .card-title-bar {
   background: rgba(255, 255, 255, 0.25);
 }
 
-[data-theme="sketch-dark"] .preview-item-sm {
+[data-theme="sketch-dark"] .card-desc-bar {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="sketch-dark"] .card-status-dot {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+[data-theme="sketch-dark"] .card-badge {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="sketch-dark"] .compact-item {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="sketch-dark"] .compact-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+[data-theme="sketch-dark"] .compact-line {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="sketch-dark"] .list-row {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="sketch-dark"] .list-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+[data-theme="sketch-dark"] .list-text {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="sketch-dark"] .list-badge {
   background: rgba(255, 255, 255, 0.18);
 }
 
-[data-theme="sketch-dark"] .preview-row {
-  background: rgba(255, 255, 255, 0.18);
+[data-theme="sketch-dark"] .minimal-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="sketch-dark"] .preview-dot {
-  background: rgba(255, 255, 255, 0.22);
+[data-theme="sketch-dark"] .minimal-dot {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 
 /* 深色主题适配 */
