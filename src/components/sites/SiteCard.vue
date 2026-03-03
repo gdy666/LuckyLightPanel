@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useConfigStore } from '@/stores/config'
 import { useNavStore } from '@/stores/nav'
@@ -133,12 +133,12 @@ function getBestUrl(): string | null {
 // 点击卡片处理
 function handleClick(event: MouseEvent) {
   event.preventDefault()
-  
+
   const effectiveType = getEffectiveNetworkType()
   const { frontendUrls = [], backendUrls = [] } = props.site
   const validFrontend = frontendUrls.filter(u => u && u.trim())
   const validBackend = backendUrls.filter(u => u && u.trim())
-  
+
   // 混合模式（包括自动模式查询失败的降级情况）：只要有多个链接就弹出下拉菜单让用户选择
   if (effectiveType === 'hybrid') {
     const urls = getHybridUrls()
@@ -147,7 +147,7 @@ function handleClick(event: MouseEvent) {
       return
     }
   }
-  
+
   // 外网模式
   if (effectiveType === 'external') {
     // 有多个外网链接：显示外网链接下拉菜单
@@ -163,7 +163,7 @@ function handleClick(event: MouseEvent) {
       return
     }
   }
-  
+
   // 内网模式
   if (effectiveType === 'internal') {
     // 有多个内网链接：显示内网链接下拉菜单
@@ -179,7 +179,7 @@ function handleClick(event: MouseEvent) {
       return
     }
   }
-  
+
   // 其他情况直接打开链接
   const url = getBestUrl()
   if (url) {
@@ -188,6 +188,23 @@ function handleClick(event: MouseEvent) {
   }
 }
 
+// 键盘事件处理（可访问性）
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleClick(event as unknown as MouseEvent)
+  }
+}
+
+// 可访问性标签
+const ariaLabel = computed(() => {
+  const parts = [`打开 ${props.site.name}`]
+  if (props.site.description) {
+    parts.push(props.site.description)
+  }
+  return parts.join(' - ')
+})
+
 // 用于显示的最佳链接（hover状态等）- 保留函数以供未来使用
 // const bestUrl = computed(() => getBestUrl())
 
@@ -195,13 +212,27 @@ function handleClick(event: MouseEvent) {
 const iconUrl = computed(() => {
   const { iconUrl } = props.site
   if (!iconUrl) return null
-  
+
   if (iconUrl.startsWith('http://') || iconUrl.startsWith('https://')) {
     return iconUrl
   }
-  
+
   return `./backend/iconlibs/${iconUrl}`
 })
+
+// 图标加载状态
+const iconLoading = ref(true)
+const iconError = ref(false)
+
+function handleIconLoad() {
+  iconLoading.value = false
+}
+
+function handleIconError(event: Event) {
+  iconLoading.value = false
+  iconError.value = true
+  ;(event.target as HTMLImageElement).style.display = 'none'
+}
 
 // 是否显示描述
 const showDesc = computed(() => configStore.showDescription && props.site.description)
@@ -263,7 +294,11 @@ const iconClass = computed(() => {
 <template>
   <div
     :class="cardClass"
+    role="button"
+    :tabindex="0"
+    :aria-label="ariaLabel"
     @click="handleClick"
+    @keydown="handleKeydown"
   >
     <!-- 边框发光线 -->
     <div class="card-border-glow" />
@@ -275,12 +310,16 @@ const iconClass = computed(() => {
         :class="iconClass"
         :style="iconBgStyle"
       >
+        <!-- 加载骨架屏 -->
+        <div v-if="iconLoading && iconUrl" class="icon-skeleton" />
         <img
           v-if="iconUrl"
           :src="iconUrl"
           :alt="site.name"
           class="icon-img"
-          @error="($event.target as HTMLImageElement).style.display = 'none'"
+          loading="lazy"
+          @load="handleIconLoad"
+          @error="handleIconError"
         />
         <span v-else class="icon-text" :class="{ 'text-lg': layout === 'large' }">
           {{ site.name.charAt(0).toUpperCase() }}
@@ -371,7 +410,19 @@ const iconClass = computed(() => {
 }
 
 .cyber-card.layout-list {
-  padding: 0.75rem 0.875rem;
+  padding: 0.875rem 1rem;
+  border-left: 3px solid transparent;
+  transition:
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 300ms ease,
+    border-color 300ms ease,
+    background 300ms ease,
+    border-left-color 300ms ease;
+}
+
+.cyber-card.layout-list:hover {
+  transform: translateY(-2px);
+  border-left-color: hsl(var(--neon-cyan));
 }
 
 .cyber-card.layout-minimal {
@@ -619,5 +670,35 @@ const iconClass = computed(() => {
 
 .cyber-card:hover .list-external-icon {
   color: hsl(var(--neon-cyan));
+}
+
+/* 可访问性 - 焦点状态 */
+.cyber-card:focus {
+  outline: none;
+  border-color: hsl(var(--neon-cyan) / 0.5);
+  box-shadow:
+    var(--site-card-shadow-hover),
+    0 0 0 3px hsl(var(--neon-cyan) / 0.2),
+    0 0 20px -6px hsl(var(--neon-cyan) / 0.3);
+}
+
+.cyber-card:focus-visible {
+  outline: 2px solid hsl(var(--neon-cyan));
+  outline-offset: 2px;
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-card {
+    transition: none;
+  }
+
+  .cyber-card:hover {
+    transform: none;
+  }
+
+  .cyber-card:focus {
+    box-shadow: var(--site-card-shadow-hover);
+  }
 }
 </style>

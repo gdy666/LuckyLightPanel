@@ -390,50 +390,18 @@ onMounted(() => {
 /* ============ Docker 网格布局 ============ */
 .docker-grid {
   display: grid;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
-/* Normal 布局 - 详情卡片 */
+/* Normal 布局 - 使用 auto-fill 实现更流畅的响应式 */
 .docker-grid.normal {
-  grid-template-columns: repeat(1, 1fr);
-}
-
-@media (min-width: 640px) {
-  .docker-grid.normal { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .docker-grid.normal { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .docker-grid.normal { grid-template-columns: repeat(4, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
 /* Compact 布局 - 紧凑显示更多 */
 .docker-grid.compact {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-@media (min-width: 480px) {
-  .docker-grid.compact { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 640px) {
-  .docker-grid.compact { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .docker-grid.compact { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .docker-grid.compact { grid-template-columns: repeat(5, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .docker-grid.compact { grid-template-columns: repeat(6, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
 }
 
 /* List 布局 - 列表展示 */
@@ -443,30 +411,19 @@ onMounted(() => {
   gap: 0.625rem;
 }
 
+/* 大屏幕下列表模式使用双列 */
+@media (min-width: 1600px) {
+  .docker-grid.list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem 1.5rem;
+  }
+}
+
 /* Minimal 布局 - 极简显示最多 */
 .docker-grid.minimal {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.625rem;
-}
-
-@media (min-width: 480px) {
-  .docker-grid.minimal { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (min-width: 640px) {
-  .docker-grid.minimal { grid-template-columns: repeat(5, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .docker-grid.minimal { grid-template-columns: repeat(6, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .docker-grid.minimal { grid-template-columns: repeat(8, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .docker-grid.minimal { grid-template-columns: repeat(10, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: clamp(0.5rem, 1.5vw, 0.625rem);
 }
 
 /* 空状态 */

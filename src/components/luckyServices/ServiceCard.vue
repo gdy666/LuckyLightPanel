@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useNavStore } from '@/stores/nav'
 import { useConfigStore } from '@/stores/config'
 import { Globe, Network, Wifi, ArrowDownToLine, ArrowUpFromLine, Activity, Zap, Copy, Check } from 'lucide-vue-next'
-import { ref } from 'vue'
 import type { LuckyService } from '@/types'
 
 const props = defineProps<{
@@ -256,12 +255,41 @@ const minimalIconBgStyle = computed(() => {
     }
   }
 })
+
+// 图标加载状态
+const iconLoading = ref(true)
+const iconError = ref(false)
+
+function handleIconLoad() {
+  iconLoading.value = false
+}
+
+function handleIconError(event: Event) {
+  iconLoading.value = false
+  iconError.value = true
+  ;(event.target as HTMLImageElement).style.display = 'none'
+}
+
+// 可访问性标签
+const ariaLabel = computed(() => {
+  const parts = [`Lucky 服务: ${displayName.value}`]
+  parts.push(`类型: ${typeConfig.value.label}`)
+  parts.push(`状态: ${stateConfig.value.text}`)
+  if (props.service.description) {
+    parts.push(props.service.description)
+  }
+  return parts.join(' - ')
+})
 </script>
 
 <template>
-  <div :class="cardClass">
+  <div
+    :class="cardClass"
+    role="article"
+    :aria-label="ariaLabel"
+  >
     <!-- 霓虹边框效果 -->
-    <div 
+    <div
       class="card-glow"
       :style="{ '--shadow-color': `hsl(${typeConfig.shadow})` }"
     />
@@ -288,12 +316,16 @@ const minimalIconBgStyle = computed(() => {
               class="icon-box"
               :style="iconBgStyle"
             >
+              <!-- 加载骨架屏 -->
+              <div v-if="iconLoading && iconUrl" class="icon-skeleton" />
               <img
                 v-if="iconUrl"
                 :src="iconUrl"
                 :alt="displayName"
                 class="icon-img"
-                @error="($event.target as HTMLImageElement).style.display = 'none'"
+                loading="lazy"
+                @load="handleIconLoad"
+                @error="handleIconError"
               />
               <component v-else :is="typeConfig.icon" class="icon-default" />
             </div>
@@ -423,12 +455,15 @@ const minimalIconBgStyle = computed(() => {
             class="compact-icon"
             :style="compactIconBgStyle"
           >
+            <div v-if="iconLoading && iconUrl" class="icon-skeleton-sm" />
             <img
               v-if="iconUrl"
               :src="iconUrl"
               :alt="displayName"
               class="icon-img"
-              @error="($event.target as HTMLImageElement).style.display = 'none'"
+              loading="lazy"
+              @load="handleIconLoad"
+              @error="handleIconError"
             />
             <component v-else :is="typeConfig.icon" class="icon-default-sm" />
           </div>
@@ -484,12 +519,15 @@ const minimalIconBgStyle = computed(() => {
           class="list-icon"
           :style="listIconBgStyle"
         >
+          <div v-if="iconLoading && iconUrl" class="icon-skeleton-sm" />
           <img
             v-if="iconUrl"
             :src="iconUrl"
             :alt="displayName"
             class="icon-img"
-            @error="($event.target as HTMLImageElement).style.display = 'none'"
+            loading="lazy"
+            @load="handleIconLoad"
+            @error="handleIconError"
           />
           <component v-else :is="typeConfig.icon" class="icon-default-sm" />
         </div>
@@ -577,12 +615,15 @@ const minimalIconBgStyle = computed(() => {
           class="minimal-icon"
           :style="minimalIconBgStyle"
         >
+          <div v-if="iconLoading && iconUrl" class="icon-skeleton-md" />
           <img
             v-if="iconUrl"
             :src="iconUrl"
             :alt="displayName"
             class="icon-img"
-            @error="($event.target as HTMLImageElement).style.display = 'none'"
+            loading="lazy"
+            @load="handleIconLoad"
+            @error="handleIconError"
           />
           <component v-else :is="typeConfig.icon" class="icon-default-md" />
           <!-- 状态指示器 -->
@@ -672,11 +713,13 @@ const minimalIconBgStyle = computed(() => {
 
 /* List 布局 */
 .service-card.layout-list {
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
+  border-left: 3px solid transparent;
 }
 
 .service-card.layout-list:hover {
-  transform: translateY(-2px) scale(1.005);
+  transform: translateY(-2px);
+  border-left-color: hsl(var(--neon-green));
 }
 
 /* Minimal 布局 */
@@ -1433,9 +1476,9 @@ const minimalIconBgStyle = computed(() => {
 }
 
 .list-stats {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(60px, 80px));
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
@@ -1576,19 +1619,124 @@ const minimalIconBgStyle = computed(() => {
 }
 
 /* ============ 响应式适配 ============ */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .card-inner-list {
     flex-wrap: wrap;
+    gap: 0.625rem;
   }
-  
-  /* 移动端：统计数据换到第二行，状态保持在容器名称右侧 */
+
   .list-stats,
   .list-stats-placeholder {
     width: 100%;
-    justify-content: flex-start;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
+    margin-top: 0.375rem;
+    padding-top: 0.375rem;
     border-top: 1px solid hsl(var(--glass-border));
+  }
+}
+
+@media (max-width: 480px) {
+  .card-inner-list {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .list-content {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .list-status {
+    flex-shrink: 0;
+  }
+
+  .list-stats,
+  .list-stats-placeholder {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* 骨架屏样式 */
+.icon-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--glass-bg)) 25%,
+    hsl(var(--glass-bg-hover)) 50%,
+    hsl(var(--glass-bg)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: inherit;
+}
+
+.icon-skeleton-sm {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--glass-bg)) 25%,
+    hsl(var(--glass-bg-hover)) 50%,
+    hsl(var(--glass-bg)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: inherit;
+}
+
+.icon-skeleton-md {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--glass-bg)) 25%,
+    hsl(var(--glass-bg-hover)) 50%,
+    hsl(var(--glass-bg)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: inherit;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 可访问性 - 焦点状态 */
+.service-card:focus {
+  outline: none;
+  border-color: hsl(var(--neon-green) / 0.5);
+  box-shadow:
+    var(--site-card-shadow-hover),
+    0 0 0 3px hsl(var(--neon-green) / 0.2),
+    0 0 20px -6px hsl(var(--neon-green) / 0.3);
+}
+
+.service-card:focus-visible {
+  outline: 2px solid hsl(var(--neon-green));
+  outline-offset: 2px;
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .service-card {
+    transition: none;
+  }
+
+  .service-card:hover {
+    transform: none;
+  }
+
+  .icon-skeleton,
+  .icon-skeleton-sm,
+  .icon-skeleton-md {
+    animation: none;
   }
 }
 </style>

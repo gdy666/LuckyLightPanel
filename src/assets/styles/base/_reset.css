@@ -27,6 +27,82 @@ body {
   line-height: 1.6;
   letter-spacing: -0.01em;
   overflow-x: hidden;
+  /* 主题切换过渡 */
+  transition:
+    background-color 400ms ease,
+    color 400ms ease;
+}
+
+/* 主题切换过渡 - 全局元素 */
+:root {
+  transition: background-color 400ms ease;
+}
+
+/* 主题切换过渡 - 卡片组件 */
+.cyber-card,
+.docker-card,
+.service-card,
+.glass-card,
+.glass-card-neon {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 主题切换过渡 - 文字 */
+.card-title,
+.compact-title,
+.list-title,
+.minimal-title,
+.card-desc,
+.group-title {
+  transition: color 300ms ease, text-shadow 300ms ease;
+}
+
+/* 主题切换过渡 - 图标 */
+.neon-icon,
+.icon-box,
+.compact-icon,
+.list-icon,
+.minimal-icon {
+  transition:
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 300ms ease,
+    filter 300ms ease;
+}
+
+/* 主题切换过渡 - 徽章 */
+.status-badge,
+.type-badge,
+.list-status-badge,
+.list-type-badge {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+/* 主题切换过渡 - 输入框 */
+.search-box,
+.search-input,
+.glass-search {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+/* 主题切换过渡 - 按钮 */
+.action-btn,
+.search-btn,
+button {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
 }
 
 button {

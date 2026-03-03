@@ -285,68 +285,24 @@ const gridClass = computed(() => {
 /* 网格布局 */
 .site-grid {
   display: grid;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
-/* Normal 布局 - 移动端2列 */
+/* Normal 布局 - 使用 auto-fill 实现更流畅的响应式 */
 .site-grid.normal {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 640px) {
-  .site-grid.normal { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .site-grid.normal { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .site-grid.normal { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .site-grid.normal { grid-template-columns: repeat(5, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
 /* Compact 布局 - 紧凑显示更多 */
 .site-grid.compact {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.625rem;
-}
-
-@media (min-width: 480px) {
-  .site-grid.compact { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 640px) {
-  .site-grid.compact { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .site-grid.compact { grid-template-columns: repeat(5, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .site-grid.compact { grid-template-columns: repeat(6, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .site-grid.compact { grid-template-columns: repeat(8, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
 }
 
 /* Large 布局（保留向后兼容）*/
 .site-grid.large {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-}
-
-@media (min-width: 640px) {
-  .site-grid.large { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .site-grid.large { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* List 布局 */
@@ -356,30 +312,19 @@ const gridClass = computed(() => {
   gap: 0.75rem;
 }
 
+/* 大屏幕下列表模式使用双列 */
+@media (min-width: 1400px) {
+  .site-grid.list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
+  }
+}
+
 /* Minimal 布局 - 极简显示最多 */
 .site-grid.minimal {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-@media (min-width: 480px) {
-  .site-grid.minimal { grid-template-columns: repeat(4, 1fr); }
-}
-
-@media (min-width: 640px) {
-  .site-grid.minimal { grid-template-columns: repeat(5, 1fr); }
-}
-
-@media (min-width: 768px) {
-  .site-grid.minimal { grid-template-columns: repeat(6, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .site-grid.minimal { grid-template-columns: repeat(8, 1fr); }
-}
-
-@media (min-width: 1280px) {
-  .site-grid.minimal { grid-template-columns: repeat(10, 1fr); }
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
 }
 
 /* 空状态 */

@@ -59,12 +59,12 @@
   --bg-page: 45 30% 88%;
   --bg-elevated: 45 28% 94%;
 
-  /* 状态颜色 - 柔和手绘风 */
-  --primary: 210 25% 45%;
-  --primary-rgb: 85, 110, 145;
-  --success: 150 22% 40%;
-  --warning: 40 35% 50%;
-  --error: 0 30% 50%;
+  /* 状态颜色 - 增强对比度，提高可识别性 */
+  --primary: 210 28% 45%;
+  --primary-rgb: 85, 115, 145;
+  --success: 150 28% 42%;
+  --warning: 40 40% 50%;
+  --error: 0 35% 50%;
 
   /* 站点卡片专属样式 - 素描纸张 */
   --site-card-bg: 45 28% 95% / 0.92;
@@ -614,4 +614,73 @@
 
 [data-theme="sketch-light"] .search-bar-container .header-icon {
   animation: none;
+}
+
+/* ============================================
+   状态指示器增强 - 素描风格
+   ============================================ */
+
+/* 运行状态 - 添加微妙光晕 */
+[data-theme="sketch-light"] .status-indicator.status-running {
+  background: hsl(150 28% 42%);
+  box-shadow: 0 0 4px hsl(150 28% 42% / 0.5);
+}
+
+/* 停止状态 */
+[data-theme="sketch-light"] .status-indicator.status-stopped {
+  background: hsl(0 35% 50%);
+  box-shadow: 0 0 4px hsl(0 35% 50% / 0.5);
+}
+
+/* 暂停状态 */
+[data-theme="sketch-light"] .status-indicator.status-paused {
+  background: hsl(40 40% 50%);
+  box-shadow: 0 0 4px hsl(40 40% 50% / 0.5);
+}
+
+/* 未知状态 */
+[data-theme="sketch-light"] .status-indicator.status-unknown {
+  background: hsl(var(--text-muted));
+}
+
+/* 状态徽章增强 - 添加边框 */
+[data-theme="sketch-light"] .status-badge,
+[data-theme="sketch-light"] .list-status-badge {
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+/* 类型徽章增强 */
+[data-theme="sketch-light"] .type-badge,
+[data-theme="sketch-light"] .list-type-badge {
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+/* 状态点增强 */
+[data-theme="sketch-light"] .status-dot {
+  box-shadow: 0 0 3px currentColor;
+}
+
+/* 活跃图标动画 - 素描风格 */
+@keyframes sketch-pulse-light {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+[data-theme="sketch-light"] .activity-icon {
+  animation: sketch-pulse-light 2s infinite;
+}
+
+/* 素描风格骨架屏 */
+[data-theme="sketch-light"] .icon-skeleton,
+[data-theme="sketch-light"] .icon-skeleton-sm,
+[data-theme="sketch-light"] .icon-skeleton-md {
+  background: linear-gradient(
+    90deg,
+    hsl(45 28% 92%) 25%,
+    hsl(45 28% 96%) 50%,
+    hsl(45 28% 92%) 75%
+  );
+  background-size: 200% 100%;
 }

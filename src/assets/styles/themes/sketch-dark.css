@@ -59,12 +59,12 @@
   --bg-page: 40 12% 8%;
   --bg-elevated: 40 10% 12%;
 
-  /* 状态颜色 - 柔和手绘风 */
-  --primary: 210 20% 55%;
-  --primary-rgb: 110, 135, 165;
-  --success: 150 18% 45%;
-  --warning: 40 30% 55%;
-  --error: 0 25% 55%;
+  /* 状态颜色 - 增强对比度，提高可识别性 */
+  --primary: 210 25% 55%;
+  --primary-rgb: 110, 140, 170;
+  --success: 150 25% 50%;
+  --warning: 40 40% 55%;
+  --error: 0 35% 55%;
 
   /* 站点卡片专属样式 - 素描纸张 */
   --site-card-bg: 40 8% 15% / 0.92;
@@ -614,4 +614,73 @@
 
 [data-theme="sketch-dark"] .search-bar-container .header-icon {
   animation: none;
+}
+
+/* ============================================
+   状态指示器增强 - 素描风格
+   ============================================ */
+
+/* 运行状态 - 添加微妙光晕 */
+[data-theme="sketch-dark"] .status-indicator.status-running {
+  background: hsl(150 25% 50%);
+  box-shadow: 0 0 4px hsl(150 25% 50% / 0.5);
+}
+
+/* 停止状态 */
+[data-theme="sketch-dark"] .status-indicator.status-stopped {
+  background: hsl(0 35% 55%);
+  box-shadow: 0 0 4px hsl(0 35% 55% / 0.5);
+}
+
+/* 暂停状态 */
+[data-theme="sketch-dark"] .status-indicator.status-paused {
+  background: hsl(40 40% 55%);
+  box-shadow: 0 0 4px hsl(40 40% 55% / 0.5);
+}
+
+/* 未知状态 */
+[data-theme="sketch-dark"] .status-indicator.status-unknown {
+  background: hsl(var(--text-muted));
+}
+
+/* 状态徽章增强 - 添加边框 */
+[data-theme="sketch-dark"] .status-badge,
+[data-theme="sketch-dark"] .list-status-badge {
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+/* 类型徽章增强 */
+[data-theme="sketch-dark"] .type-badge,
+[data-theme="sketch-dark"] .list-type-badge {
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+/* 状态点增强 */
+[data-theme="sketch-dark"] .status-dot {
+  box-shadow: 0 0 3px currentColor;
+}
+
+/* 活跃图标动画 - 素描风格 */
+@keyframes sketch-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+[data-theme="sketch-dark"] .activity-icon {
+  animation: sketch-pulse 2s infinite;
+}
+
+/* 素描风格骨架屏 */
+[data-theme="sketch-dark"] .icon-skeleton,
+[data-theme="sketch-dark"] .icon-skeleton-sm,
+[data-theme="sketch-dark"] .icon-skeleton-md {
+  background: linear-gradient(
+    90deg,
+    hsl(40 8% 15%) 25%,
+    hsl(40 8% 20%) 50%,
+    hsl(40 8% 15%) 75%
+  );
+  background-size: 200% 100%;
 }
