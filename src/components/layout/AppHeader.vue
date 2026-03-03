@@ -222,7 +222,7 @@ function openSettings() {
 
 .app-header {
   position: relative;
-  z-index: 50;
+  z-index: 110;
   height: var(--header-height, 3.5rem);
   margin: 0.75rem 1rem 0;
   border-radius: 1rem;
@@ -589,10 +589,10 @@ function openSettings() {
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid hsl(var(--border-subtle) / 0.5);
-  box-shadow: 
+  box-shadow:
     0 4px 24px -4px rgba(0, 0, 0, 0.3),
     0 8px 32px -8px rgba(0, 0, 0, 0.2);
-  z-index: 100;
+  z-index: 200;
 }
 
 .theme-option {
