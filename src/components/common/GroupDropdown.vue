@@ -465,53 +465,53 @@ button.group-option:hover {
 /* 素描浅色主题适配 */
 [data-theme="sketch-light"] .group-badge {
   background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 
+  border-color: rgba(100, 110, 120, 0.2);
+  box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    0 2px 8px -2px rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .group-badge:hover {
   background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(100, 110, 120, 0.3);
 }
 
 [data-theme="sketch-light"] .group-dropdown {
   background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.12),
+  border-color: rgba(100, 110, 120, 0.15);
+  box-shadow:
+    0 8px 32px rgba(100, 110, 120, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="sketch-light"] .group-option {
-  color: rgba(60, 50, 40, 0.85);
+  color: rgba(80, 90, 100, 0.85);
 }
 
 [data-theme="sketch-light"] button.group-option:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(100, 110, 120, 0.06);
 }
 
 [data-theme="sketch-light"] .option-main:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(100, 110, 120, 0.06);
 }
 
 [data-theme="sketch-light"] .dropdown-divider {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .option-count {
-  color: rgba(60, 50, 40, 0.5);
-  background: rgba(0, 0, 0, 0.06);
+  color: rgba(100, 110, 120, 0.55);
+  background: rgba(100, 110, 120, 0.08);
 }
 
 [data-theme="sketch-light"] .option-checkbox {
-  color: rgba(60, 50, 40, 0.4);
+  color: rgba(100, 110, 120, 0.45);
 }
 
 [data-theme="sketch-light"] .option-checkbox:hover {
-  background: rgba(0, 0, 0, 0.08);
-  color: rgba(60, 50, 40, 0.65);
+  background: rgba(100, 110, 120, 0.1);
+  color: rgba(100, 110, 120, 0.7);
 }
 
 /* 素描深色主题适配 */

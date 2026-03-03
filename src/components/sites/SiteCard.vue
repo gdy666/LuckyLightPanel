@@ -875,13 +875,13 @@ const iconClass = computed(() => {
 
 /* ========== 素描浅色主题适配 ========== */
 [data-theme="sketch-light"] .minimal-name {
-  background: hsl(40 20% 98% / 0.95);
-  border-color: hsl(40 15% 80%);
-  box-shadow: 0 4px 12px rgba(60, 50, 40, 0.1);
+  background: hsl(210 5% 98% / 0.95);
+  border-color: hsl(210 10% 85%);
+  box-shadow: 0 4px 12px rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .minimal-name span {
-  color: hsl(40 12% 20%);
+  color: hsl(210 15% 20%);
 }
 
 /* ========== 素描深色主题适配 ========== */

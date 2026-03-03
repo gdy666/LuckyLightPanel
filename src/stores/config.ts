@@ -87,7 +87,7 @@ export const useConfigStore = defineStore('config', () => {
       return { background: 'hsl(40 12% 8%)' }
     }
     if (config.value.theme === 'sketch-light') {
-      return { background: 'hsl(45 30% 88%)' }
+      return { background: 'hsl(210 10% 92%)' }
     }
 
     const bg = config.value.background

@@ -369,6 +369,6 @@ const gridClass = computed(() => {
 }
 
 [data-theme="sketch-light"] .empty-text {
-  color: rgba(60, 50, 40, 0.5);
+  color: rgba(100, 110, 120, 0.5);
 }
 </style>

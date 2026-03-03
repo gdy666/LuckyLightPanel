@@ -555,71 +555,71 @@ onUnmounted(() => {
 /* 素描浅色主题适配 */
 [data-theme="sketch-light"] .layout-badge {
   background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 
+  border-color: rgba(100, 110, 120, 0.2);
+  box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    0 2px 8px -2px rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .layout-badge:hover {
   background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(100, 110, 120, 0.3);
 }
 
 [data-theme="sketch-light"] .layout-dropdown {
   background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.12),
+  border-color: rgba(100, 110, 120, 0.15);
+  box-shadow:
+    0 8px 32px rgba(100, 110, 120, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="sketch-light"] .layout-option {
-  color: rgba(60, 50, 40, 0.85);
+  color: rgba(80, 90, 100, 0.85);
 }
 
 [data-theme="sketch-light"] .layout-option:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(100, 110, 120, 0.06);
 }
 
 [data-theme="sketch-light"] .layout-option.active::after {
-  background: rgba(60, 50, 40, 0.6);
-  box-shadow: 0 0 6px rgba(60, 50, 40, 0.4);
+  background: rgba(100, 110, 120, 0.6);
+  box-shadow: 0 0 6px rgba(100, 110, 120, 0.4);
 }
 
 [data-theme="sketch-light"] .layout-preview {
-  border-color: rgba(0, 0, 0, 0.12);
-  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(100, 110, 120, 0.18);
+  background: rgba(100, 110, 120, 0.05);
 }
 
 [data-theme="sketch-light"] .preview-icon-box,
 [data-theme="sketch-light"] .preview-dot,
 [data-theme="sketch-light"] .preview-list-dot,
 [data-theme="sketch-light"] .preview-mini-icon {
-  background: rgba(60, 50, 40, 0.35);
+  background: rgba(100, 110, 120, 0.4);
 }
 
 [data-theme="sketch-light"] .preview-line,
 [data-theme="sketch-light"] .preview-line-short,
 [data-theme="sketch-light"] .preview-list-line {
-  background: rgba(60, 50, 40, 0.2);
+  background: rgba(100, 110, 120, 0.22);
 }
 
 [data-theme="sketch-light"] .preview-badge,
 [data-theme="sketch-light"] .preview-list-badge,
 [data-theme="sketch-light"] .preview-mini-dot {
-  background: rgba(60, 50, 40, 0.4);
+  background: rgba(100, 110, 120, 0.45);
 }
 
 [data-theme="sketch-light"] .preview-stat-box {
-  background: rgba(60, 50, 40, 0.08);
-  border-color: rgba(60, 50, 40, 0.15);
+  background: rgba(100, 110, 120, 0.1);
+  border-color: rgba(100, 110, 120, 0.2);
 }
 
 [data-theme="sketch-light"] .preview-compact-item,
 [data-theme="sketch-light"] .preview-list-row,
 [data-theme="sketch-light"] .preview-mini-card {
-  background: rgba(60, 50, 40, 0.08);
+  background: rgba(100, 110, 120, 0.1);
 }
 
 /* 素描深色主题适配 */

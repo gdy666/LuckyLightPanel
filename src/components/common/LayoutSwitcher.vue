@@ -693,61 +693,61 @@ onUnmounted(() => {
 /* ============ 素描浅色主题适配 ============ */
 [data-theme="sketch-light"] .layout-badge {
   background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 
+  border-color: rgba(100, 110, 120, 0.2);
+  box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    0 2px 8px -2px rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .layout-badge:hover {
   background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(6, 182, 212, 0.35);
+  border-color: rgba(100, 110, 120, 0.3);
 }
 
 [data-theme="sketch-light"] .layout-dropdown {
   background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.12),
+  border-color: rgba(100, 110, 120, 0.15);
+  box-shadow:
+    0 8px 32px rgba(100, 110, 120, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="sketch-light"] .layout-option {
-  color: rgba(60, 50, 40, 0.85);
+  color: rgba(80, 90, 100, 0.85);
 }
 
 [data-theme="sketch-light"] .layout-option::before {
-  background: linear-gradient(135deg, transparent 0%, rgba(60, 50, 40, 0.05) 100%);
+  background: linear-gradient(135deg, transparent 0%, rgba(100, 110, 120, 0.05) 100%);
 }
 
 [data-theme="sketch-light"] .layout-option:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: rgba(100, 110, 120, 0.06);
+  border-color: rgba(100, 110, 120, 0.1);
 }
 
 [data-theme="sketch-light"] .layout-option.active {
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.08) 0%, rgba(80, 70, 60, 0.04) 100%);
-  border-color: rgba(60, 50, 40, 0.25);
-  color: rgba(60, 50, 40, 1);
-  box-shadow: 
-    0 0 15px -5px rgba(60, 50, 40, 0.2),
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.1) 0%, rgba(120, 130, 140, 0.05) 100%);
+  border-color: rgba(100, 110, 120, 0.3);
+  color: rgba(60, 70, 80, 1);
+  box-shadow:
+    0 0 15px -5px rgba(100, 110, 120, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 [data-theme="sketch-light"] .layout-option.active::after {
-  background: rgba(60, 50, 40, 0.6);
-  box-shadow: 0 0 6px rgba(60, 50, 40, 0.4);
+  background: rgba(100, 110, 120, 0.6);
+  box-shadow: 0 0 6px rgba(100, 110, 120, 0.4);
 }
 
 [data-theme="sketch-light"] .layout-option.active .layout-preview {
-  border-color: rgba(60, 50, 40, 0.3);
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.06) 0%, rgba(80, 70, 60, 0.03) 100%);
-  box-shadow: 0 0 10px -3px rgba(60, 50, 40, 0.2);
+  border-color: rgba(100, 110, 120, 0.35);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.08) 0%, rgba(120, 130, 140, 0.04) 100%);
+  box-shadow: 0 0 10px -3px rgba(100, 110, 120, 0.2);
 }
 
 [data-theme="sketch-light"] .layout-preview {
-  border-color: rgba(0, 0, 0, 0.12);
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%);
+  border-color: rgba(100, 110, 120, 0.18);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.06) 0%, rgba(120, 130, 140, 0.03) 100%);
 }
 
 [data-theme="sketch-light"] .layout-preview::before {
@@ -755,62 +755,62 @@ onUnmounted(() => {
 }
 
 [data-theme="sketch-light"] .preview-card-icon {
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.5) 0%, rgba(80, 70, 60, 0.3) 100%);
-  box-shadow: 0 2px 4px rgba(60, 50, 40, 0.2);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.5) 0%, rgba(120, 130, 140, 0.3) 100%);
+  box-shadow: 0 2px 4px rgba(100, 110, 120, 0.2);
 }
 
 [data-theme="sketch-light"] .card-title-bar {
-  background: rgba(60, 50, 40, 0.3);
+  background: rgba(100, 110, 120, 0.35);
 }
 
 [data-theme="sketch-light"] .card-desc-bar {
-  background: rgba(60, 50, 40, 0.15);
+  background: rgba(100, 110, 120, 0.18);
 }
 
 [data-theme="sketch-light"] .card-status-dot {
-  background: rgba(60, 50, 40, 0.4);
+  background: rgba(100, 110, 120, 0.45);
   box-shadow: none;
 }
 
 [data-theme="sketch-light"] .card-badge {
-  background: rgba(60, 50, 40, 0.25);
+  background: rgba(100, 110, 120, 0.28);
 }
 
 [data-theme="sketch-light"] .compact-item {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(100, 110, 120, 0.04);
 }
 
 [data-theme="sketch-light"] .compact-icon {
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.4) 0%, rgba(80, 70, 60, 0.2) 100%);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.45) 0%, rgba(120, 130, 140, 0.25) 100%);
 }
 
 [data-theme="sketch-light"] .compact-line {
-  background: rgba(60, 50, 40, 0.2);
+  background: rgba(100, 110, 120, 0.22);
 }
 
 [data-theme="sketch-light"] .list-row {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(100, 110, 120, 0.04);
 }
 
 [data-theme="sketch-light"] .list-icon {
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.4) 0%, rgba(80, 70, 60, 0.2) 100%);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.45) 0%, rgba(120, 130, 140, 0.25) 100%);
 }
 
 [data-theme="sketch-light"] .list-text {
-  background: rgba(60, 50, 40, 0.2);
+  background: rgba(100, 110, 120, 0.22);
 }
 
 [data-theme="sketch-light"] .list-badge {
-  background: rgba(60, 50, 40, 0.25);
+  background: rgba(100, 110, 120, 0.28);
 }
 
 [data-theme="sketch-light"] .minimal-icon {
-  background: linear-gradient(135deg, rgba(60, 50, 40, 0.35) 0%, rgba(80, 70, 60, 0.2) 100%);
-  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.15);
+  background: linear-gradient(135deg, rgba(100, 110, 120, 0.4) 0%, rgba(120, 130, 140, 0.22) 100%);
+  box-shadow: 0 1px 3px rgba(100, 110, 120, 0.15);
 }
 
 [data-theme="sketch-light"] .minimal-dot {
-  background: rgba(60, 50, 40, 0.35);
+  background: rgba(100, 110, 120, 0.4);
   box-shadow: none;
 }
 
