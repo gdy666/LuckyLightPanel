@@ -135,8 +135,6 @@ export const useNavStore = defineStore('nav', () => {
       const bgImages = config.settings?.backgroundImages || []
       configStore.setServerBackgrounds(bgImages)
     }
-    // 基础配置加载完成，关闭加载状态
-    isLoading.value = false
     return config
   }
 
